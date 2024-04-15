@@ -40,7 +40,7 @@ public class GameFrame extends JFrame implements ScreenSize {
                 getContentPane().add(gameMap);
                 break;
             case GAME_END:
-                gameEnd = new GameEnd(gameFrame);
+                gameEnd = new GameEnd(gameFrame, true);
                 getContentPane().add(gameEnd);
                 break;
         }
