@@ -6,6 +6,9 @@ public class GameFrame extends JFrame implements ScreenSize {
     private GameFrame gameFrame = this;
 
     public GameFrame() {
+    public boolean isgame;
+    public GamePanel gamePanel;
+    public GameFrame() {
         setTitle("JJAP GUN");
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
