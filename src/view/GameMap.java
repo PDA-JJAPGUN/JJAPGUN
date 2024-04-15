@@ -13,8 +13,12 @@ public class GameMap extends JPanel {
     private Boss boss;
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
     private Image bossStageImg = bossStageIcon.getImage();
-    int bossStageBY1 = 0;
-    int bossStageBY2 = -bossStageImg.getHeight(null);
+    private ImageIcon stageIcon = new ImageIcon("images/Stage.png");
+    private Image stageImg = stageIcon.getImage();
+    int stageY1 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
+    int stageY2 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
+    int bossStageBY1 = -bossStageImg.getHeight(null);
+    int bossStageBY2 = -bossStageImg.getHeight(null)*2;
 
     int appear = 1;
     int score = 0;
@@ -39,9 +43,22 @@ public class GameMap extends JPanel {
                 setComponentZOrder(la_score,0);
 
                 while(gameFrame.isgame){
-
-
+                    if(boss == null){
+                        stageY1++;
+                        stageY2++;
+                        if (stageY1 > stageImg.getHeight(null)) {
+                            stageY1 = 0;
+                        }
+                        if (stageY2 > 0) {
+                            stageY2 = -stageImg.getHeight(null);
+                        }
+                    }
                     if(boss != null){
+                        if(bossStageBY1 < bossStageImg.getHeight(null) &&
+                                bossStageBY2 < bossStageImg.getHeight(null)){
+                            stageY1++;
+                            stageY2++;
+                        }
                         bossStageBY1++;
                         bossStageBY2++;
                         if (bossStageBY1 > bossStageImg.getHeight(null)) {
@@ -51,7 +68,6 @@ public class GameMap extends JPanel {
                             bossStageBY2 = -bossStageImg.getHeight(null);
                         }
                     }
-
 
                     try{
                         appear++;
@@ -69,7 +85,8 @@ public class GameMap extends JPanel {
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
-//        g.drawImage(stageImg, 0, stageY, null);
+        g.drawImage(stageImg, 0, stageY1, null);
+        g.drawImage(stageImg, 0, stageY2, null);
         g.drawImage(bossStageImg, 0, bossStageBY1, null);
         g.drawImage(bossStageImg, 0, bossStageBY2, null);
 
@@ -82,7 +99,7 @@ public class GameMap extends JPanel {
     }
 
     public void batchEnemy(){
-        if(appear == 1000){
+        if(appear == 3000){
             boss = new Boss(0, -300);
         }
         if(appear == 2000*30){
