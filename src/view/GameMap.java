@@ -55,7 +55,7 @@ public class GameMap extends JPanel {
     }
 
     public void batchEnemy(){
-        if(appear == 3000){
+        if(appear == 5){
             boss = new Boss(0, -300);
         }
     }
