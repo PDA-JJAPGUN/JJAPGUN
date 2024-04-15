@@ -4,8 +4,9 @@ import javax.swing.*;
 
 public class GameView extends JFrame implements ScreenSize {
     private GameView gameView = this;
-    public boolean isgame;
-    public GamePanel gamePanel;
+    public GameMap gameMap;
+    public GameTitle gameTitle;
+
     public GameView() {
         setTitle("JJAP GUN");
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -17,14 +18,20 @@ public class GameView extends JFrame implements ScreenSize {
     }
 
     public void init() {
-        change("gameTitle");
+        change("gameMap");
     }
     // 패널 바꾸기 함수
     public void change(String panelName) {
         if (panelName.equals("gameTitle")) {
-            GameTitle gameTitle = new GameTitle(gameView);
+            gameTitle = new GameTitle(gameView);
             getContentPane().removeAll();
             getContentPane().add(gameTitle);
+            revalidate();
+            repaint();
+        } else if(panelName.equals("gameMap")){
+            gameMap = new GameMap(gameView);
+            getContentPane().removeAll();
+            getContentPane().add(gameMap);
             revalidate();
             repaint();
         }
