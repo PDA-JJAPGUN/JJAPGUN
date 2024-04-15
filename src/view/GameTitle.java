@@ -58,7 +58,7 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
                 break;
             case EXIT:
                 // 게임 종료
-                System.out.println("exit");
+                gameFrame.dispose();
                 break;
             default:
                 break;
