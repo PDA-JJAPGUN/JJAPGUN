@@ -1,5 +1,5 @@
-import view.GameView;
 
+import view.GameView;
 
 public class Main {
     public static void main(String[] args) {
