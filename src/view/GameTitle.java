@@ -11,8 +11,11 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
 
     private ImageIcon backgroundIcon = new ImageIcon("images/GameTitle.png");
     private Image backgroundImage = backgroundIcon.getImage();
+    private GameFrame gameFrame;
 
     public GameTitle(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+
         setLayout(null); // 레이아웃을 null로 설정하여 컴포넌트 위치를 절대값으로 지정
 
         // 시작 버튼 생성 및 설정
@@ -35,9 +38,9 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // 게임 시작 버튼을 눌렀을 경우
         if ("start".equals(e.getActionCommand())) {
-            // TODO: 게임 시작 로직 추가
-            // 게임 패널로 이동 
+            gameFrame.change("gameMap");
         }
     }
 }
