@@ -10,8 +10,7 @@ public class GameMap extends JPanel {
 
     private GameMap gameMap = this;
     private GameFrame gameFrame;
-
-    private Boss boss = new Boss(0,-300);
+    private Boss boss;
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
 
     private Image bossStageImg = bossStageIcon.getImage();
@@ -20,6 +19,25 @@ public class GameMap extends JPanel {
 
     public GameMap(GameFrame gameFrame){
         this.gameFrame = gameFrame;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                gameFrame.isgame = true;
+
+                while(gameFrame.isgame){
+                    setLayout(null);
+                    try{
+                        appear++;
+                        batchEnemy();
+                        repaint();
+                        Thread.sleep(3);
+                    }catch(Exception e){
+                        //Handle exception
+                    }
+                }
+            }
+        }).start();
     }
     @Override
     protected void paintComponent(Graphics g){
@@ -27,9 +45,19 @@ public class GameMap extends JPanel {
 
 
         g.drawImage(bossStageImg, 0, 0, null);
-        boss.bossDraw(g);
 
+
+        if (boss != null){
+            boss.bossDraw(g);
+        }
 
         repaint();
     }
+
+    public void batchEnemy(){
+        if(appear == 3000){
+            boss = new Boss(0, -300);
+        }
+    }
 }
+

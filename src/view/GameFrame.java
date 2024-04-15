@@ -20,7 +20,7 @@ public class GameFrame extends JFrame implements ScreenSize {
     }
 
     public void init() {
-        change("gameTitle");
+        change("gameMap");
     }
     // 패널 바꾸기 함수
     public void change(String panelName) {
