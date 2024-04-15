@@ -15,19 +15,14 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
 
     public GameTitle(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
+    }
 
-        setLayout(null); // 레이아웃을 null로 설정하여 컴포넌트 위치를 절대값으로 지정
-
-        // 시작 버튼 생성 및 설정
-        JButton startBtn = new JButton("START");
-        int btnWidth = 150; // 버튼의 너비
-        int btnHeight = 40; // 버튼의 높이
-        int x = (SCREEN_WIDTH - btnWidth) / 2; // 버튼을 화면 가운데 정렬
-        int y = SCREEN_HEIGHT - btnHeight - 50; // 버튼을 화면 하단에서 적당히 위로 올림
-        startBtn.setBounds(x, y, btnWidth, btnHeight); // 버튼의 위치와 크기 설정
-        startBtn.setActionCommand("start");
-        startBtn.addActionListener(this);
-        add(startBtn); // 패널에 버튼 추가
+    protected JButton createButton(String text, int width, int height, int x, int y) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, width, height);
+        button.setActionCommand(text); // 버튼 이름과 동일하게 처리, 버튼 추가 시 ActionCommand 에 추가
+        button.addActionListener(this);
+        return button;
     }
 
     @Override
@@ -38,9 +33,22 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // 게임 시작 버튼을 눌렀을 경우
-        if ("start".equals(e.getActionCommand())) {
-            gameFrame.change("gameMap");
+        // 버튼을 눌렀을 때
+        switch (ActionCommand.valueOf(e.getActionCommand())) {
+            case START:
+                gameFrame.change(Panel.GAME_MAP.name());
+                break;
+            case RANK:
+                //TODO: 랭크 패널 변경
+                System.out.println("rank");
+                break;
+            case EXIT:
+                // 게임 종료
+                System.out.println("exit");
+                break;
+            default:
+                break;
         }
+
     }
 }
