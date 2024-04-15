@@ -22,7 +22,7 @@ public class GameEnd extends GameTitle {
 
         JLabel gameResult = createLabel((isGameWin)? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
         gameResult.setFont(new Font(null, Font.BOLD, 40));
-        gameResult.setBounds(x-10,  0, 300, 100);  // 위치와 크기 설정
+        gameResult.setBounds(x-10,  y - 330, 300, 100);  // 위치와 크기 설정
         add(gameResult);
 
         JLabel currScore = createLabel("SCORE : 11111", Color.WHITE, Color.BLACK);
