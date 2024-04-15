@@ -9,7 +9,7 @@ public class GameMap extends JPanel {
 
 
     private GameMap gameMap = this;
-    private GameView gameView;
+    private GameFrame gameFrame;
 
     private Boss boss = new Boss(0,-300);
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
@@ -18,8 +18,8 @@ public class GameMap extends JPanel {
 
     int appear = 1;
 
-    public GameMap(GameView gameView){
-        this.gameView = gameView;
+    public GameMap(GameFrame gameFrame){
+        this.gameFrame = gameFrame;
     }
     @Override
     protected void paintComponent(Graphics g){

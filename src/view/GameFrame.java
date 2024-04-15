@@ -2,12 +2,14 @@ package view;
 
 import javax.swing.*;
 
-public class GameView extends JFrame implements ScreenSize {
-    private GameView gameView = this;
+
+public class GameFrame extends JFrame implements ScreenSize {
+    private GameFrame gameFrame = this;
     public GameMap gameMap;
     public GameTitle gameTitle;
+    public boolean isgame;
 
-    public GameView() {
+    public GameFrame() {
         setTitle("JJAP GUN");
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,18 +20,18 @@ public class GameView extends JFrame implements ScreenSize {
     }
 
     public void init() {
-        change("gameMap");
+        change("gameTitle");
     }
     // 패널 바꾸기 함수
     public void change(String panelName) {
         if (panelName.equals("gameTitle")) {
-            gameTitle = new GameTitle(gameView);
+            gameTitle = new GameTitle(gameFrame);
             getContentPane().removeAll();
             getContentPane().add(gameTitle);
             revalidate();
             repaint();
         } else if(panelName.equals("gameMap")){
-            gameMap = new GameMap(gameView);
+            gameMap = new GameMap(gameFrame);
             getContentPane().removeAll();
             getContentPane().add(gameMap);
             revalidate();
