@@ -21,6 +21,7 @@ public class GameFrame extends JFrame implements ScreenSize {
     }
 
     public void init() {
+
         change(Panel.GAME_START.name());
 //        change(Panel.GAME_END.name());
     }
