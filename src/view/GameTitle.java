@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
 import javax.swing.*;
 
@@ -23,6 +24,19 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
         button.setActionCommand(text); // 버튼 이름과 동일하게 처리, 버튼 추가 시 ActionCommand 에 추가
         button.addActionListener(this);
         return button;
+    }
+
+    protected JLabel createLabel(String text, Color backgroundColor, Color textColor) {
+        JLabel jLabel =  new JLabel(text);
+
+        if (backgroundColor != null) {
+            jLabel.setOpaque(true); // 불투명도를 참으로 설정하여 배경색을 보이게 한다
+            jLabel.setBackground(backgroundColor);
+        }
+
+        jLabel.setForeground(textColor);
+
+        return jLabel;
     }
 
     @Override
