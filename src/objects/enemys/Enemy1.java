@@ -1,2 +1,5 @@
-package objects.enemys;public class Enemy1 {
+package objects.enemys;
+
+public class Enemy1 {
+
 }
