@@ -1,4 +1,4 @@
-package objects.enemys;
+package objects.Enemy;
 
 public class Enemy1 {
 
