@@ -1,14 +1,17 @@
 package objects;
 
+import objects.player.Player;
+import view.GameFrame;
+
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
 public class Bullet implements Runnable{
 
-//    private view.GameFrame gameFrame;
+    private GameFrame gameFrame;
     
-//    private PlayerPlane player;
+    private Player player;
     private boolean collision;
 
     public Image bulletImg1 = new ImageIcon("images/bullet1.png").getImage();
@@ -28,9 +31,9 @@ public class Bullet implements Runnable{
 
     public int b1Width = bulletImg1.getWidth(null);
     public int b1Height = bulletImg1.getHeight(null);
-    public Bullet( int x, int y, double angel, double speed, int width, int height) {
+    public Bullet(Player player, int x, int y, double angel, double speed, int width, int height) {
 
-//        this.player = player;
+        this.player = player;
         this.x = x;
         this.y = y;
         this.angel = angel;
@@ -46,21 +49,21 @@ public class Bullet implements Runnable{
        bulletthread.start();
     }
 
-//    public view.GameFrame getGameFrame() {
-//        return gameFrame;
-//    }
-//
-//    public void setGameFrame(view.GameFrame gameFrame) {
-//        this.gameFrame = gameFrame;
-//    }
+    public view.GameFrame getGameFrame() {
+        return gameFrame;
+    }
 
-//    public PlayerPlane getPlayer() {
-//        return player;
-//    }
+    public void setGameFrame(view.GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+    }
 
-//    public void setPlayer(PlayerPlane player) {
-//        this.player = player;
-//    }
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
 
     public void setThreadLife(boolean threadLife) {
@@ -147,67 +150,66 @@ public class Bullet implements Runnable{
 
             }
 
-//            if (!player.getInvincible()) { // 무적상태가 아니면
-//
-//                crash();
-//
-//                try {
-//                    if (collision) {
-//                        explosePlayer(player); // 충돌 폭발 메서드
-//                    }
-//                    Thread.sleep(10);
-//
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
+            if (!player.getInvincible()) { // 무적상태가 아니면
+
+                crash();
+
+                try {
+                    if (collision) {
+                        explosePlayer(player); // 충돌 폭발 메서드
+                    }
+                    Thread.sleep(10);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-//    public void crash() { // 적 총알이 아군 비행기에 부딪쳤을 시 충돌연산
-//        if (Math.abs(
-//                ((player.getX() - 11) + player.getWidth() / 3) - (x + width / 3)) < (width / 3 + player.getWidth() / 3)
-//                && Math.abs(((player.getY() - 5) + player.getHeight() / 3) - (y + height / 3)) < (height / 3
-//                + player.getHeight() / 3)) {
-//            collision = true;
-//        } else {
-//            collision = false;
-//        }
-//    }
+    public void crash() { // 적 총알이 아군 비행기에 부딪쳤을 시 충돌연산
+        if (Math.abs(
+                ((player.getX() - 11) + player.getWidth() / 3) - (x + width / 3)) < (width / 3 + player.getWidth() / 3)
+                && Math.abs(((player.getY() - 5) + player.getHeight() / 3) - (y + height / 3)) < (height / 3
+                + player.getHeight() / 3)) {
+            collision = true;
+        } else {
+            collision = false;
+        }
+    }
 
-//    public void explosePlayer(PlayerPlane player) { // 충돌후 이미지 변경 및 목숨카운트
-//
-//        try {
-//            ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
-//            player.setIcon(explosionIcon);
+    public void explosePlayer(Player player) { // 충돌후 이미지 변경 및 목숨카운트
 
-//
-//            y = 1000; // 가비지 컬렉션으로만 가능, 강제로 제거하려면 finallize 함수
+        try {
+            ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
+            player.setIcon(explosionIcon);
 
-//
-//            islife = false;// 이게아닌가벼
-//            player.setInvincible(true); // 무적상태
-//            Thread.sleep(1000);
-//
-//            player.setIcon(player.getPlayerInvincibleIcon());
-//            player.setLife(player.getLife() - 1);
-//            System.out.println("남은목숨:" + player.getLife());
-//            player.setX(200);
-//            player.setY(520);
-//
-//            Thread.sleep(1500);
-//
-//            player.setIcon(player.getPlayerIcon());
-//            player.setInvincible(false);
-//
-//            player.repaint();
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//
-//    }
+
+            y = 1000; // 가비지 컬렉션으로만 가능, 강제로 제거하려면 finallize 함수
+
+
+            player.setInvincible(true); // 무적상태
+            Thread.sleep(1000);
+
+            player.setIcon(player.getPlayerInvincibleIcon());
+            player.setLife(player.getLife() - 1);
+            System.out.println("남은목숨:" + player.getLife());
+            player.setX(200);
+            player.setY(520);
+
+            Thread.sleep(1500);
+
+            player.setIcon(player.getPlayerIcon());
+            player.setInvincible(false);
+
+            player.repaint();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 
 }
 

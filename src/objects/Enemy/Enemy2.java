@@ -106,11 +106,9 @@ public class Enemy2 extends Enemy {
 
     }
 
-
-
     public void bulletCreate() {
         if (count % 100 == 0 && count < 300) {
-            bullet = new Bullet(x + 35, y + 55, 270, 5, 20, 20);
+            bullet = new Bullet(player, x + 35, y + 55, 270, 5, 20, 20);
             bullets.add(bullet);
             System.out.println(bullets.size());
         }

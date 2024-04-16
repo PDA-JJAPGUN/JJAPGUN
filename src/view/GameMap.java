@@ -33,7 +33,7 @@ public class GameMap extends JPanel {
 
     int appear = 1;
     JLabel la_score;
-    Font font = new Font(null,1,40);
+    Font font = new Font(null,1,20);
 
 
     public GameMap(GameFrame gameFrame){
@@ -56,10 +56,10 @@ public class GameMap extends JPanel {
                 setComponentZOrder(laLifecount2,0);
                 setComponentZOrder(laLifecount3,0);
 
-                la_score = new JLabel("0");
+                la_score = new JLabel("SCORE: 0");
                 la_score.setForeground(Color.WHITE);
                 la_score.setFont(font);
-                la_score.setBounds(425, 0, 150, 50);
+                la_score.setBounds(350, 0, 150, 50);
                 la_score.setHorizontalAlignment(JLabel.RIGHT);
                 add(la_score);
                 setComponentZOrder(la_score, 0);
@@ -115,7 +115,7 @@ public class GameMap extends JPanel {
         repaint();
     }
 
-    private void lifeLaInit() { // 당장 안 써요. 괜히 만들어달라 했나..
+    private void lifeLaInit() {
         lifeCounticon = new ImageIcon("images/LifeCount.png");
         laLifecount = new JLabel(lifeCounticon);
         laLifecount2 = new JLabel(lifeCounticon);
@@ -128,30 +128,31 @@ public class GameMap extends JPanel {
             laLifecount.setVisible(true);
             laLifecount2.setVisible(true);
             laLifecount3.setVisible(true);
-            repaint();
         } else if (gameFrame.player.getLife() == 2) {
             laLifecount.setVisible(true);
             laLifecount2.setVisible(true);
             laLifecount3.setVisible(false);
-            repaint();
         } else if (gameFrame.player.getLife() == 1) {
             laLifecount.setVisible(true);
             laLifecount2.setVisible(false);
             laLifecount3.setVisible(false);
-            repaint();
         } else {
             laLifecount.setVisible(false);
             laLifecount2.setVisible(false);
             laLifecount3.setVisible(false);
-            repaint();
         }
-    }
 
-    public void updateScore() {
-        la_score.setText(String.valueOf(gameFrame.player.score));
+        laLifecount.setLocation(0, 0);
+        laLifecount2.setLocation(50, 0);
+        laLifecount3.setLocation(100, 0);
         repaint();
     }
 
+    public void updateScore() {
+        la_score.setText(String.format("SCORE: %d", gameFrame.player.score));
+        la_score.setLocation(350, 0);
+        repaint();
+    }
 
     public void changeBgImg(){
         if(appear == 5000){

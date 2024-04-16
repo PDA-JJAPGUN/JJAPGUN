@@ -92,7 +92,7 @@ public class Boss implements Plane {
             int angle = 220 + random.nextInt(90);  // 발사 각도 범위 (0~359)
             int speed = random.nextInt(5) + 3;  // 속도 범위 (3~7)
 
-            Bullet bullet = new Bullet(280, 150, angle, speed, 20, 20);
+            Bullet bullet = new Bullet(player, 280, 150, angle, speed, 20, 20);
             bullets.add(bullet);
         }
     }
