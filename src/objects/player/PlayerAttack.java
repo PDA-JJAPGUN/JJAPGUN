@@ -26,11 +26,6 @@ public class PlayerAttack implements Runnable {
 	private double speed; // 총알 속도
 	private int width;
 	private int height;
-	private boolean islife; // Thread를 삭제시키기 위한 구문
-
-	public PlayerAttack() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public PlayerAttack(Boss boss, List<Enemy> enemies, int x, int y, double bulletAngle, double bulletSpeed) {
 
@@ -46,27 +41,10 @@ public class PlayerAttack implements Runnable {
 
 		collision = false;
 
-		Thread bulletthread = new Thread(this); // 총알 충돌 thread 생성, 실행
+		Thread bulletthread = new Thread(this);
 		bulletthread.setName("PlayerBullet");
 		bulletthread.start();
 
-	}
-
-	public PlayerAttack getPlayerAttack() {
-		return playerAttack;
-	}
-
-	public void setPlayerAttack(PlayerAttack playerAttack) {
-		this.playerAttack = playerAttack;
-	}
-
-
-	public boolean isCollision() {
-		return collision;
-	}
-
-	public void setCollision(boolean collision) {
-		this.collision = collision;
 	}
 
 	public int getX() {
@@ -79,26 +57,6 @@ public class PlayerAttack implements Runnable {
 
 	public int getY() {
 		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public double getAngle() {
-		return angle;
-	}
-
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-
-	public double getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(double speed) {
-		this.speed = speed;
 	}
 
 	public int getWidth() {
@@ -125,7 +83,7 @@ public class PlayerAttack implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (boss != null && boss.getHp() > 0) { // 생명이 0보다 크면
+		while (boss != null && boss.getHp() > 0) {
 
 			crash();
 
@@ -133,7 +91,6 @@ public class PlayerAttack implements Runnable {
 				if (collision) {
 					y = -100;
 					boss.setHp(boss.getHp() - 1);
-					System.out.println(boss.getHp());
 				}
 
 				if (boss.getHp() == 0) {
@@ -144,8 +101,7 @@ public class PlayerAttack implements Runnable {
 				Thread.sleep(10);
 
 				if (x > 1000 || x < -500 || y < -100 || y > 1000) {
-					// System.out.println("bullet thread terminate");
-					return; // Thread 종료구문
+					return; // Thread 종료
 				}
 
 			} catch (Exception e) {
@@ -161,15 +117,11 @@ public class PlayerAttack implements Runnable {
 			Enemy unit = enemies.get(i);
 
 			if (crashed(unit)) {
-
-				System.out.println("하기 전: " + unit.crushCheck);
 				unit.setLife(unit.getLife() - 1);
 
 				if (unit.getLife() <= 0) {
-					System.out.println("적 hp 0 됨");
 					toRemove.add(i);
-					unit.crushCheck = true;
-
+					unit.setCrushCheck(true);
 				}
 			}
 		}
@@ -181,18 +133,16 @@ public class PlayerAttack implements Runnable {
 		return removedEnemy;
 	}
 
-	// 플레이어 총알이 적의 비행기에 닿았는지 탐지하는 연산
+	// 사용자 총알이 적기에 닿았는지
 	private boolean crashed(Enemy unit) {
-		// x,y : 위치값 , w,h : 이미지의 높이와 길이.
-		if (Math.abs((this.getX() + this.getWidth() / 2) - (unit.x + unit.width / 2)) < (unit.width / 2 + this.getWidth() / 2)
-				&& Math.abs((this.getY() + this.getHeight() / 2) - (unit.y + unit.height / 2)) < (unit.height / 2 + this.getHeight() / 2))
+		if (Math.abs((this.getX() + this.getWidth() / 2) - (unit.getX() + unit.getWidth() / 2)) < (unit.getWidth() / 2 + this.getWidth() / 2)
+				&& Math.abs((this.getY() + this.getHeight() / 2) - (unit.getY() + unit.getHeight() / 2)) < (unit.getHeight() / 2 + this.getHeight() / 2))
 			return true;
 		else
 			return false;
 	}
 
-
-	public void crash() { // 플레이어 총알이 보스에 부딪쳤을 시 충돌연산
+	public void crash() {
 		if (Math.abs(((boss.getX()) + boss.getWidth() / 2) - (x + width / 3)) < (width / 3 + boss.getWidth() / 3)
 				&& Math.abs(((boss.getY()) + boss.getHeight() / 2) - (y + height / 3)) < (height / 3
 						+ boss.getHeight() / 3)) {
@@ -202,13 +152,13 @@ public class PlayerAttack implements Runnable {
 		}
 	}
 
-	public void explosePlayer(Boss boss) { // 충돌후 이미지 변경 및 목숨카운트
+	public void explosePlayer(Boss boss) {
 		try {
 			ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
 			boss.imgBoss = explosionIcon.getImage();
 			Thread.sleep(3000);
 
-			System.out.println("보스 처치!!");
+			System.out.println("보스 die~");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

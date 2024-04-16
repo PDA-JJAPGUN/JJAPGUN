@@ -72,10 +72,7 @@ public class UserView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("isLogin : "+ isLogin);
-
         if (e.getSource() == btn_start && isLogin){
-            System.out.println("hihi");
             this.dispose();
             gameController.gameStart();
         }else
