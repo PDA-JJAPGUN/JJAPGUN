@@ -1,7 +1,14 @@
 package objects.player;
 
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import objects.Enemy.Enemy;
+import objects.Enemy.Enemy1;
+import objects.Enemy.Enemy2;
+import objects.Enemy.Enemy3;
 import objects.boss.Boss;
+import service.UserService;
+import session.UserSession;
 import view.GameFrame;
 
 import javax.swing.*;
@@ -10,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends JLabel {
-	public final static String TAG = "Player: ";
+	public UserService userService;
+	public UserSession userSession;
 
 	public Player player = this;
 
@@ -40,12 +48,17 @@ public class Player extends JLabel {
 	public boolean isAttack = false;
 	public boolean isWeaponLevelUp = false;
 
+	public int score = 0;
+
 	private PlayerAttack playerAttack;
 	public List<PlayerAttack> playerBullets = new ArrayList<>();
 
 	ArrayList<Integer> check = new ArrayList<>(); // 필요없는 총알 인덱스 체크용
 
 	public Player(GameFrame gameFrame, String PLANE) {
+
+		this.userService = new UserService();
+		this.userSession = UserSession.getInstance();
 
 		this.gameFrame = gameFrame;
 		playerIcon = new ImageIcon("img/Player" + PLANE + ".png");
@@ -298,8 +311,10 @@ public class Player extends JLabel {
 		List<Integer> toRemove = new ArrayList<>();
 		for (int i = 0; i < playerBullets.size(); i++) {
 			PlayerAttack bullet = playerBullets.get(i);
-			if (bullet.processCrash()) {
+			Enemy crashedEnemy;
+			if ((crashedEnemy = bullet.processCrash()) != null) {
 				toRemove.add(i);
+				addScore(crashedEnemy);
 			}
 		}
 
@@ -309,9 +324,21 @@ public class Player extends JLabel {
 		}
 	}
 
+	private void addScore(Enemy enemy) {
+		if (enemy instanceof Enemy1) {
+			score += 100;
+		} else if (enemy instanceof Enemy2) {
+			score += 200;
+		} else if (enemy instanceof Enemy3) {
+			score += 300;
+		}
+	}
+
 
 	private void gameOver() {
 		if (life <= 0) {
+			userService.saveBestScore(userSession.getLoggedInUserId(), score);
+
 			isAlive = false; //dispose 해도 안의 쓰레드는 살아있다...  이 명령 추가.. 그냥 완전 다 삭제해주는 함수는 없나...
 			gameFrame.isgame = false;
 			gameFrame.dispose();

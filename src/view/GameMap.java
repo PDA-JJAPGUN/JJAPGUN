@@ -32,7 +32,6 @@ public class GameMap extends JPanel {
 
 
     int appear = 1;
-    int score = 0;
     JLabel la_score;
     Font font = new Font(null,1,40);
 
@@ -57,7 +56,7 @@ public class GameMap extends JPanel {
                 setComponentZOrder(laLifecount2,0);
                 setComponentZOrder(laLifecount3,0);
 
-                la_score = new JLabel(score+"");
+                la_score = new JLabel("0");
                 la_score.setForeground(Color.WHITE);
                 la_score.setFont(font);
                 la_score.setBounds(425, 0, 150, 50);
@@ -78,7 +77,8 @@ public class GameMap extends JPanel {
                     try {
 
                         appear++;
-                        lifeCounting();
+                        countLife();
+                        updateScore();
                         batchEnemy();
                         crushBorder();
 
@@ -123,7 +123,7 @@ public class GameMap extends JPanel {
 
     }
 
-    public void lifeCounting() {
+    public void countLife() {
         if (gameFrame.player.getLife() == 3) {
             laLifecount.setVisible(true);
             laLifecount2.setVisible(true);
@@ -145,6 +145,11 @@ public class GameMap extends JPanel {
             laLifecount3.setVisible(false);
             repaint();
         }
+    }
+
+    public void updateScore() {
+        la_score.setText(String.valueOf(gameFrame.player.score));
+        repaint();
     }
 
 
