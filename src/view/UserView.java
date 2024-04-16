@@ -71,6 +71,7 @@ public class UserView extends JFrame implements ActionListener {
 
             if(userController.login(loginDto)) {
                 la_result.setText("로그인 성공");
+                this.dispose();
             } else {
                 la_result.setText("로그인 실패");
             }
