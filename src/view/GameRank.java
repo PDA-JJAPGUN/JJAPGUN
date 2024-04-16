@@ -51,7 +51,7 @@ public class GameRank extends GameTitle {
                 score.setHorizontalAlignment(JLabel.CENTER);
 
                 rank.setBounds(80, y, 50, 50);
-                nickname.setBounds(200, y, 50, 50);
+                nickname.setBounds(200, y, 100, 50);
                 score.setBounds(380, y, 50, 50);
 
                 backgroundPanel.add(rank);
