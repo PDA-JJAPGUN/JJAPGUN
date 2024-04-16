@@ -13,8 +13,8 @@ public class Enemy2 extends Enemy {
     private Enemy2 enemy2 = this;
     private static final String TAG = "Enemy4 : ";
 
-//    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-//    private Bullet bullet;
+    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    private Bullet bullet;
 
     public Enemy2(int x, int y, int w, int h) {
 //        this.player = player;
@@ -51,7 +51,7 @@ public class Enemy2 extends Enemy {
 
                         }
 
-//                        bulletCreate();
+                        bulletCreate();
                         count++;
 
                         if (y > 900) {
@@ -107,24 +107,24 @@ public class Enemy2 extends Enemy {
 
 
 
-//    public void bulletCreate() {
-//        if (count % 100 == 0) {
-//            bullet = new Bullet(x + 20, y + 40, 270, 4, 20, 20);
-//            bullets.add(bullet);
-//
-//        }
-//    }
+    public void bulletCreate() {
+        if (count % 100 == 0 && count < 300) {
+            bullet = new Bullet(x + 35, y + 55, 270, 5, 20, 20);
+            bullets.add(bullet);
+            System.out.println(bullets.size());
+        }
+    }
 
     @Override
     public void planeDraw(Graphics g) { // 그림그리기
         g.drawImage(image, x, y, width, height, null);
-//        for (int i = 0; i < bullets.size(); i++) {
-//            bullet = bullets.get(i);
-//            g.drawImage(bullet.bulletImg1, bullet.getX(), bullet.getY(), bullet.getWidth(),
-//                    bullet.getHeight(), null);
-//
-//
-//        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullet = bullets.get(i);
+            g.drawImage(bullet.bulletImg1, bullet.getX(), bullet.getY(), bullet.getWidth(),
+                    bullet.getHeight(), null);
+
+
+        }
     }
 
 }

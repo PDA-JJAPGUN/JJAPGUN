@@ -5,14 +5,13 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Bullet implements Runnable{
-    // 클래스 이름을 크게 Bullet이라 짓고 둘이 상속받는게 좋았을 듯, 일단 시간없으니 진행
 
-    private view.GameFrame gameFrame;
-
+//    private view.GameFrame gameFrame;
+    
 //    private PlayerPlane player;
     private boolean collision;
 
-    Image bulletImg1 = new ImageIcon("images/bullet1.png").getImage();
+    public Image bulletImg1 = new ImageIcon("images/bullet1.png").getImage();
     Image bulletImg2 = new ImageIcon("images/bullet2.png").getImage();
     Image bulletImg3 = new ImageIcon("images/bullet3.png").getImage();
     Image bulletImg4 = new ImageIcon("images/bullet4.png").getImage();
@@ -24,10 +23,9 @@ public class Bullet implements Runnable{
     private double speed = 2; // 총알속도
     private int width;
     private int height;
-    private boolean islife;
 
-    public Bullet(/*PlayerPlane player,*/ int x, int y, double angel, double speed, int width,
-                  int height) {
+    private boolean isThreadLife;
+    public Bullet( int x, int y, double angel, double speed, int width, int height) {
 
 //        this.player = player;
         this.x = x;
@@ -36,15 +34,22 @@ public class Bullet implements Runnable{
         this.speed = speed;
         this.width = width;
         this.height = height;
-        this.islife = true;
+        this.isThreadLife = true;
 
         this.collision = false;
 
-        Thread bulletthread = new Thread(this); // 총알 충돌 thread 생성, 실행
-        bulletthread.setName("EnemyBullet");
-        bulletthread.start();
+       Thread bulletthread = new Thread(this); // 총알 충돌 thread 생성, 실행
+       bulletthread.setName("EnemyBullet");
+       bulletthread.start();
     }
 
+//    public view.GameFrame getGameFrame() {
+//        return gameFrame;
+//    }
+//
+//    public void setGameFrame(view.GameFrame gameFrame) {
+//        this.gameFrame = gameFrame;
+//    }
 
 //    public PlayerPlane getPlayer() {
 //        return player;
@@ -53,6 +58,12 @@ public class Bullet implements Runnable{
 //    public void setPlayer(PlayerPlane player) {
 //        this.player = player;
 //    }
+
+
+    public void setThreadLife(boolean threadLife) {
+        isThreadLife = threadLife;
+    }
+
 
     public boolean isCollision() {
         return collision;
@@ -78,6 +89,22 @@ public class Bullet implements Runnable{
         this.y = y;
     }
 
+    public double getAngel() {
+        return angel;
+    }
+
+    public void setAngel(double angel) {
+        this.angel = angel;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
     public int getWidth() {
         return width;
     }
@@ -94,21 +121,27 @@ public class Bullet implements Runnable{
         this.height = height;
     }
 
-    public void fire() { // 총알 발사
+    public void fire() throws InterruptedException { // 총알 발사
         x -= Math.cos(Math.toRadians(angel)) * speed;
         y -= Math.sin(Math.toRadians(angel)) * speed;
+        Thread.sleep(10);
+
     }
 
     @Override
     public void run() {
 
-        while (islife) {
-
-            fire();
+        while (isThreadLife) {
+            try {
+                fire();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             if (x > 1000 || x < -500 || y < -500 || y > 1000) {
-                // System.out.println("bullet thread terminate");
-                islife = false; // Thread 종료구문
+                 System.out.println("bullet thread terminate");
+                isThreadLife = false; // Thread 종료구문
+
             }
 
 //            if (!player.getInvincible()) { // 무적상태가 아니면
@@ -139,14 +172,16 @@ public class Bullet implements Runnable{
 //            collision = false;
 //        }
 //    }
-//
+
 //    public void explosePlayer(PlayerPlane player) { // 충돌후 이미지 변경 및 목숨카운트
 //
 //        try {
 //            ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
 //            player.setIcon(explosionIcon);
-//            // enemyAttack= null; //부딪칠시 적 총알 사라짐 안되네... 자바에서는 객체를 직접 제거하는 게 안되고
-//            y = 1000; // 가비지 컬렉션으로만 가능, 강제로 제거하려면 finallize 함수?
+
+//
+//            y = 1000; // 가비지 컬렉션으로만 가능, 강제로 제거하려면 finallize 함수
+
 //
 //            islife = false;// 이게아닌가벼
 //            player.setInvincible(true); // 무적상태
@@ -172,3 +207,4 @@ public class Bullet implements Runnable{
 //    }
 
 }
+
