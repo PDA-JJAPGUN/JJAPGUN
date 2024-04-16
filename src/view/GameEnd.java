@@ -1,22 +1,13 @@
 package view;
 
 import controller.GameController;
-<<<<<<< HEAD
-import controller.UserController;
-=======
->>>>>>> 56ac09d0211c615064ada103549a1bda38399153
 
 import javax.swing.*;
 import java.awt.*;
 
 
 public class GameEnd extends GameTitle {
-<<<<<<< HEAD
-
-    public GameEnd(GameFrame gameFrame, boolean isGameWin) {
-=======
     public GameEnd(GameFrame gameFrame) {
->>>>>>> 56ac09d0211c615064ada103549a1bda38399153
         super(gameFrame);
 
         setLayout(null);

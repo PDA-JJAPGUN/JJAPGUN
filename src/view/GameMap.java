@@ -119,6 +119,7 @@ public class GameMap extends JPanel {
             boss.planeDraw(g);
         }
 
+        la_stage.setLocation(100, 200);
         repaint();
     }
 
@@ -175,7 +176,6 @@ public class GameMap extends JPanel {
             stageY2 = -stageImg.getHeight(null);
             showNextLevelImg();
         }
-
     }
 
     public void showNextLevelImg(){
@@ -185,7 +185,6 @@ public class GameMap extends JPanel {
         Timer timer = new Timer(500, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 la_stage.setVisible(true);
-                la_stage.setLocation(200, 200);
                 ((Timer)e.getSource()).stop();
             }
         });
@@ -196,7 +195,6 @@ public class GameMap extends JPanel {
         Timer timer2 = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 la_stage.setVisible(false);
-                la_stage.setLocation(200, 200);
                 ((Timer)e.getSource()).stop();
             }
         });
@@ -206,7 +204,6 @@ public class GameMap extends JPanel {
         Timer timer3 = new Timer(1500, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 la_stage.setVisible(true);
-                la_stage.setLocation(200, 200);
                 ((Timer)e.getSource()).stop();
             }
         });
@@ -217,13 +214,11 @@ public class GameMap extends JPanel {
         Timer timer4 = new Timer(2000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 la_stage.setVisible(false);
-                la_stage.setLocation(200, 200);
                 ((Timer)e.getSource()).stop();
             }
         });
         timer4.setRepeats(false); // 한 번만 실행하도록 설정
         timer4.start(); // Timer 시작
-
     }
 
     public void batchEnemy() {
