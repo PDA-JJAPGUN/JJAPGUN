@@ -1,5 +1,6 @@
 package objects.Enemy;
 
+import com.sun.tools.jconsole.JConsoleContext;
 import objects.Bullet;
 
 import java.awt.Graphics;
@@ -7,13 +8,13 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Enemy3 extends Enemy {
+public class Enemy3 extends Enemy{
 
     private Enemy3 enemy3 = this;
     private static final String TAG = "Enemy3 : ";
 
-//    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-//    private Bullet bullet;
+    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    private Bullet bullet;
 
     public Enemy3(int x, int y, int w, int h) {
 //        this.player = player;
@@ -49,11 +50,11 @@ public class Enemy3 extends Enemy {
                             moveleft();
                         }
 
-//                        bulletCreate();
+                        bulletCreate();
                         count++;
 
                         if (y > 900) {
-                             System.out.println("enemy3 쓰레드 종료");
+                            // System.out.println("enemy3 쓰레드 종료");
                             isThreadLife = false;
                         }
 
@@ -103,23 +104,25 @@ public class Enemy3 extends Enemy {
 //
 //    }
 
-//    public void bulletCreate() {
-//        if (count % 100 == 0) {
-//            bullet = new Bullet( x + 20, y + 40, 270, 5, 20, 20);
-//            bullets.add(bullet);
-//
-//        }
-//    }
-//
+    public void bulletCreate() {
+        if (count % 100 == 0 && count <400) {
+
+            bullet = new Bullet( x + 35, y + 55, 270, 5, 20, 20);
+//            System.out.println("gg"+bullet.getY());
+            bullets.add(bullet);
+//            System.out.println(bullets);
+        }
+    }
+
     public void planeDraw(Graphics g) { // 그림그리기
         g.drawImage(image, x, y, width, height, null);
-//        for (int i = 0; i < bullets.size(); i++) {
-//            bullet = bullets.get(i);
-//            g.drawImage(bullet.bulletImg1, bullet.getX(), bullet.getY(), bullet.getWidth(),
-//                    bullet.getHeight(), null);
-//
-//        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullet = bullets.get(i);
+//            System.out.println("bullet.getY()"+bullet.getY());
+            g.drawImage(bullet.bulletImg1, bullet.getX(), bullet.getY(), bullet.getWidth(),
+                    bullet.getHeight(), null);
+
+        }
     }
 
 }
-
