@@ -32,7 +32,7 @@ public class UserService {
     public void saveBestScore(String id, int score) {
         UserEntity user = userDao.getUser(id);
         int currentScore = user.getBestScore();
-        user.setBestScore(score);
+        user.setBestScore(Math.max(currentScore, score));
         userDao.saveUser(user);
     }
 }
