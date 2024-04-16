@@ -7,10 +7,12 @@ import view.UserView;
 
 public class UserController {
     UserService userService;
+    GameController gameController;
 
     // 모델 객체의 메소드 호출
-    public UserController(UserService userService) {
+    public UserController(UserService userService, GameController gameController) {
         this.userService = userService;
+        this.gameController = gameController;
         new UserView(this);
     }
 
@@ -22,6 +24,6 @@ public class UserController {
 
     // 로그인
     public Boolean login(LoginDto loginDto) {
-        return userService.login(loginDto);
+        return userService.login(loginDto, gameController);
     }
 }
