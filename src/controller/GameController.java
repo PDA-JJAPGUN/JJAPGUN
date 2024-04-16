@@ -4,6 +4,7 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.UserEntity;
 import view.GameFrame;
+import view.Panel;
 
 import java.util.Comparator;
 import java.util.List;
@@ -26,10 +27,24 @@ public class GameController {
 
     UserEntity user;
     GameFrame gameFrame;
+
+    private boolean isGameWin = false;
+
+    public boolean isGameWin() {
+        return isGameWin;
+    }
+
     public void gameStart() {
         gameFrame = new GameFrame();
     }
 
+    public void setGameWin(boolean gameWin) {
+        isGameWin = gameWin;
+    }
+
+    public void gameEnd() {
+        gameFrame.change(Panel.GAME_END.name());
+    }
     public UserEntity getUser() {
         return user;
     }
