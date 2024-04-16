@@ -15,9 +15,9 @@ public class PlayerAttack implements Runnable {
 	private List<Enemy> enemies;
 	private Boss boss;
 
-	Image playerBulletImg1 = new ImageIcon("img/playerBullet1.png").getImage();
-	Image playerBulletImg2 = new ImageIcon("img/bullet1.png").getImage();
-	Image playerBulletImg3 = new ImageIcon("img/bullet3.png").getImage();
+	Image playerBulletImg1 = new ImageIcon("images/playerBullet1.png").getImage();
+	Image playerBulletImg2 = new ImageIcon("images/bullet1.png").getImage();
+	Image playerBulletImg3 = new ImageIcon("images/bullet3.png").getImage();
 
 	private boolean collision;
 	private int x;

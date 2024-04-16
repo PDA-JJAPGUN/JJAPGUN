@@ -15,7 +15,7 @@ public class SelectPlayer extends JPanel implements ScreenSize {
     private ImageIcon player1Icon, player2Icon, player3Icon; // 플레이어 기체 이미지
     private ImageIcon planeDetailIcon1, planeDetailIcon2, planeDetailIcon3; // 기체 상세설명 이미지
     private ImageIcon bigPlayer1icon, bigPlayer2icon, bigPlayer3icon; // 버튼 누를시 커지는 이미지
-    private ImageIcon selectPlaneIcon = new ImageIcon("img/SelectPlane1.png");
+    private ImageIcon selectPlaneIcon = new ImageIcon("images/SelectPlane1.png");
     private Image selectPlaneImg = selectPlaneIcon.getImage();
 
 
@@ -26,16 +26,16 @@ public class SelectPlayer extends JPanel implements ScreenSize {
         this.gameFrame = gameFrame;
 
         player1Icon = new ImageIcon("images/PlayerPlane1.png");
-        player2Icon = new ImageIcon("img/PlayerPlane2.png");
-        player3Icon = new ImageIcon("img/PlayerPlane3.png");
+        player2Icon = new ImageIcon("images/PlayerPlane2.png");
+        player3Icon = new ImageIcon("images/PlayerPlane3.png");
 
-        bigPlayer1icon = new ImageIcon("img/BigPlane1.png");
-        bigPlayer2icon = new ImageIcon("img/BigPlane2.png");
-        bigPlayer3icon = new ImageIcon("img/BigPlane3.png");
+        bigPlayer1icon = new ImageIcon("images/BigPlane1.png");
+        bigPlayer2icon = new ImageIcon("images/BigPlane2.png");
+        bigPlayer3icon = new ImageIcon("images/BigPlane3.png");
 
-        planeDetailIcon1 = new ImageIcon("img/PlaneDetailImg1.png");
-        planeDetailIcon2 = new ImageIcon("img/PlaneDetailImg2.png");
-        planeDetailIcon3 = new ImageIcon("img/PlaneDetailImg3.png");
+        planeDetailIcon1 = new ImageIcon("images/PlaneDetailImg1.png");
+        planeDetailIcon2 = new ImageIcon("images/PlaneDetailImg2.png");
+        planeDetailIcon3 = new ImageIcon("images/PlaneDetailImg3.png");
 
         JButton btn1 = new JButton("", player1Icon);
         JButton btn2 = new JButton("", player2Icon);

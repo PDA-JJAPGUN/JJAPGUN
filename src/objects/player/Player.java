@@ -51,8 +51,8 @@ public class Player extends JLabel {
 		this.userSession = UserSession.getInstance();
 
 		this.gameFrame = gameFrame;
-		playerIcon = new ImageIcon("img/Player" + PLANE + ".png");
-		playerInvincibleIcon = new ImageIcon("img/" + PLANE + "무적.png");
+		playerIcon = new ImageIcon("images/Player" + PLANE + ".png");
+		playerInvincibleIcon = new ImageIcon("images/" + PLANE + "무적.png");
 		this.invincible = false;
 
 		if (PLANE.equals("PLANE1")) {
