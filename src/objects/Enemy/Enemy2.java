@@ -19,7 +19,7 @@ public class Enemy2 extends Enemy {
         this.y = y;
         this.width = w;
         this.height = h;
-        this.image = new ImageIcon("images/enemy4.png").getImage();
+        this.image = new ImageIcon("images/enemy44.png").getImage();
         this.life = 3;
         this.crushCheck = false;
         this.isThreadLife = true;
@@ -61,7 +61,7 @@ public class Enemy2 extends Enemy {
         g.drawImage(image, x, y, width, height, null);
         for (int i = 0; i < bullets.size(); i++) {
             bullet = bullets.get(i);
-            g.drawImage(bullet.bulletImg1, bullet.getX(), bullet.getY(), bullet.getWidth(),
+            g.drawImage(bullet.bulletImg2, bullet.getX(), bullet.getY(), bullet.getWidth(),
                     bullet.getHeight(), null);
         }
     }

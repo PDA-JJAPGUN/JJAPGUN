@@ -12,6 +12,7 @@ public class Bullet implements Runnable{
     private boolean collision;
 
     public Image bulletImg1 = new ImageIcon("images/bullet1.png").getImage();
+    public Image bulletImg2 = new ImageIcon("images/bullet2.png").getImage();
     public Image bulletImg4 = new ImageIcon("images/bullet4.png").getImage();
 
     private int x;
