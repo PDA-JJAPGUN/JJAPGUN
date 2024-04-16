@@ -35,8 +35,11 @@ public class UserService {
 
     public void saveBestScore(String id, int score) {
         UserEntity user = userDao.getUser(id);
-        if (user.getBestScore() != null)
+        if (user.getBestScore() != null) {
             user.setBestScore(Math.max(user.getBestScore(), score));
+        } else {
+            user.setBestScore(score);
+        }
         userDao.saveUser(user);
     }
 }

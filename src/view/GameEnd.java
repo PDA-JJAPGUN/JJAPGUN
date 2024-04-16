@@ -35,25 +35,20 @@ public class GameEnd extends GameTitle {
         gameResult.setBounds(180,  400, 300, 100);  // 위치와 크기 설정
         add(gameResult);
 
-        UserEntity user = userController.getLogginedUser();
+        UserEntity user = gameController.getUser();
         JLabel currScore = createLabel(String.format("SCORE: %d", gameController.getFinalScore()), Color.WHITE, Color.BLACK);
         currScore.setBounds(130, setY(50) - 100, 300, 50);  // 위치와 크기 설정
         currScore.setFont(new Font(null, Font.BOLD, 20));
         currScore.setHorizontalAlignment(JLabel.CENTER);
         add(currScore);
 
-        JLabel bestScore = createLabel(String.format("SCORE: %d", user.getBestScore()), Color.WHITE, Color.BLACK);
+        JLabel bestScore = createLabel(String.format("BEST SCORE: %d", user.getBestScore()), Color.WHITE, Color.BLACK);
         bestScore.setBounds(130, setY(50) - 200, 300, 50);  // 위치와 크기 설정
         bestScore.setFont(new Font(null, Font.BOLD, 20));
         bestScore.setHorizontalAlignment(JLabel.CENTER);
         bestScore.setText("BEST SCORE : ");
         add(bestScore);
     }
-
-
-
-
-
 
 }
 

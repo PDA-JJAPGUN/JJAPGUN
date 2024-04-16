@@ -36,7 +36,7 @@ public class UserController {
     }
 
     public UserEntity getLogginedUser() {
-        String userId = userSession.getLoggedInUserId();
+        String userId = userSession.getLoggedInUserId(); // user session 구현 후에 사용
         return userService.getUser(userId);
     }
 }

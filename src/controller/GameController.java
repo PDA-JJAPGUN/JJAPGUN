@@ -48,6 +48,11 @@ public class GameController {
     public void setGameFrame(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
     }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
     public int getFinalScore() {
         return gameFrame.player.score;
     }
