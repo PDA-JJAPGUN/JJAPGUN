@@ -11,7 +11,6 @@ public class UserController {
     public static UserController instance;
 
     UserService userService;
-    UserSession userSession;
     GameController gameController;
 
     private UserController(UserService userService, GameController gameController) {
@@ -36,7 +35,7 @@ public class UserController {
     }
 
     public UserEntity getLogginedUser() {
-        String userId = userSession.getLoggedInUserId(); // user session 구현 후에 사용
+        String userId = UserSession.getInstance().getLoggedInUserId(); // user session 구현 후에 사용
         return userService.getUser(userId);
     }
 }
