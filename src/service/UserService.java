@@ -24,7 +24,7 @@ public class UserService {
 
         UserEntity userEntity = new UserEntity(id, password);
         boolean isLogin = userDao.login(userEntity);
-        if (isLogin) gameController.gameStart(userDao.findUser(id));
+        if (isLogin) gameController.setUser(userDao.findUser(id));
         return isLogin;
     }
 

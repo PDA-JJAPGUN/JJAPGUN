@@ -109,7 +109,7 @@ public class GameMap extends JPanel {
             }
         }
         if (boss != null){
-            boss.bossDraw(g);
+            boss.planeDraw(g);
         }
 
         repaint();
@@ -191,7 +191,7 @@ public class GameMap extends JPanel {
             }
         }
         if (appear == 10000) {
-            boss = new Boss(0, -300);
+            boss = new Boss(gameFrame.player,0, -300);
         }
     }
 
