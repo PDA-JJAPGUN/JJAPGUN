@@ -17,6 +17,8 @@ public class GameFrame extends JFrame implements ScreenSize {
     public boolean isgame;
 
     public GameFrame() {
+
+        setFocusable(true);
         init();
         setting();
         listener();
@@ -44,6 +46,7 @@ public class GameFrame extends JFrame implements ScreenSize {
             case GAME_START:
                 gameStart = new GameStart(gameFrame);
                 getContentPane().add(gameStart);
+                System.out.println("sssssssssssssss");
                 break;
             case GAME_MAP:
                 gameMap = new GameMap(gameFrame);
