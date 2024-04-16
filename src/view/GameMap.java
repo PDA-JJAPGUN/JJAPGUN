@@ -27,7 +27,7 @@ public class GameMap extends JPanel {
     Enemy enemy;
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
     private Image bossStageImg = bossStageIcon.getImage();
-    private ImageIcon stageIcon = new ImageIcon("images/Stage.png");
+    private ImageIcon stageIcon = new ImageIcon("images/Stage.jpg");
     private Image stageImg = stageIcon.getImage();
     int stageY1 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
     int stageY2 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
@@ -35,7 +35,7 @@ public class GameMap extends JPanel {
     int bossStageBY2 = -bossStageImg.getHeight(null) * 2;
 
     int appear = 1;
-    int score = 100000;
+    int score = 0;
     JLabel la_score;
     Font font = new Font(null, 1, 40);
 
@@ -113,7 +113,7 @@ public class GameMap extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        changeBgImg();
         g.drawImage(stageImg, 0, stageY1, null);
         g.drawImage(stageImg, 0, stageY2, null);
         g.drawImage(bossStageImg, 0, bossStageBY1, null);
@@ -165,6 +165,13 @@ public class GameMap extends JPanel {
 //        }
     }
 
+    public void changeBgImg(){
+        if(appear == 1000){
+
+            stageIcon = new ImageIcon("images/Stage2.png");
+            stageImg = stageIcon.getImage();
+        }
+    }
 
     public void batchEnemy() {
         if (boss == null) {
