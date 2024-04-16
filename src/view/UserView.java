@@ -97,10 +97,12 @@ public class UserView extends JFrame implements ActionListener {
             String nickname = tf_nickname.getText();
             if(id.isEmpty() || password.isEmpty() || nickname.isEmpty()) {
                 la_result.setText("회원가입 실패.\n 공백없이 입력하세요");
+                la_result.setForeground(Color.RED);
                 return;
             }
             SignupDto signupDto = new SignupDto(id, password, nickname);
 
+            la_result.setForeground(Color.BLUE);
             la_result.setText(
                     userController.signup(signupDto)+"님 회원가입 성공");
         }
@@ -119,6 +121,7 @@ public class UserView extends JFrame implements ActionListener {
                 btn_login.setVisible(false);
             } else {
                 la_result.setText("로그인 실패");
+                la_result.setForeground(Color.RED);
             }
         }
         else if (e.getSource() == btn_logout) {
@@ -127,8 +130,10 @@ public class UserView extends JFrame implements ActionListener {
         else if (e.getSource() == btn_start){
             if (isLogin)
                 gameController.gameStart();
-            else
+            else {
+                la_result.setForeground(Color.RED);
                 la_result.setText("유저정보 확인 실패");
+            }
         }
     }
 
@@ -139,6 +144,7 @@ public class UserView extends JFrame implements ActionListener {
         btn_login.setVisible(true);
 
         la_result.setText("로그아웃 성공");
+        la_result.setForeground(Color.BLUE);
         tf_nickname.setText("");
         tf_id.setText("");
         tf_password.setText("");
