@@ -11,5 +11,7 @@ public interface UserDAO {
 
     //id로 회원 찾기
     UserEntity findUser(String id);
+
+    void saveUser(UserEntity user);
 }
 

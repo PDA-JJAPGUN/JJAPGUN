@@ -152,7 +152,7 @@ public class PlayerAttack implements Runnable {
 
 	}
 
-	public boolean processCrash() {
+	public Enemy processCrash() {
 		List<Integer> toRemove = new ArrayList<>();
 		for (int i = 0; i < enemies.size(); i++) {
 			Enemy unit = enemies.get(i);
@@ -171,10 +171,11 @@ public class PlayerAttack implements Runnable {
 			}
 		}
 
+		Enemy removedEnemy = null;
 		for (int i : toRemove) {
-			enemies.remove(i);
+			removedEnemy = enemies.remove(i);
 		}
-		return !toRemove.isEmpty();
+		return removedEnemy;
 	}
 
 	// 플레이어 총알이 적의 비행기에 닿았는지 탐지하는 연산
