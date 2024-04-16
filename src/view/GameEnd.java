@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class GameEnd extends GameTitle {
     public GameEnd(GameFrame gameFrame, boolean isGameWin) {
         super(gameFrame);
@@ -36,6 +37,8 @@ public class GameEnd extends GameTitle {
         bestScore.setHorizontalAlignment(JLabel.CENTER);
         add(bestScore);
     }
+
+
 
 
 

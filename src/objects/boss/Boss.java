@@ -7,8 +7,8 @@ public class Boss {
 
     private Boss boss = this;
 
-    ImageIcon icBoss = new ImageIcon("images/bossSizeup.gif");
-    Image imgBoss = icBoss.getImage();
+    public ImageIcon icBoss = new ImageIcon("images/bossSizeup.gif");
+    public Image imgBoss = icBoss.getImage();
 
     private int x;
     private int y;
@@ -35,7 +35,7 @@ public class Boss {
     public int getHeight(){return height;}
     public void setHeight(){this.height = height;}
     public int getHp(){ return hp;}
-    public void setHp(){this.hp = hp;}
+    public void setHp(int hp){this.hp = hp;}
 
 
     public void move(){
