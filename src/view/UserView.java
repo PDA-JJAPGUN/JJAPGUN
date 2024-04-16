@@ -17,7 +17,7 @@ public class UserView extends JFrame implements ActionListener {
     boolean isLogin = false;
 
     JTextField tf_id = new JTextField();
-    JTextField tf_password = new JTextField();
+    JPasswordField tf_password = new JPasswordField();
     JTextField tf_nickname = new JTextField();
 
     JButton btn_signup = new JButton("회원가입");
