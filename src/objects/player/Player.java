@@ -269,7 +269,7 @@ public class Player extends JLabel {
 	public void setWeaponLevelUp(boolean isWepponLevelUp) {
 		this.isWeaponLevelUp = isWepponLevelUp;
 		if (isWepponLevelUp == true && weaponLevel < 6) {
-			weaponLevel = weaponLevel + 1;
+			weaponLevel = weaponLevel + 2;
 			if (weaponLevel == 4) {
 			} else if (weaponLevel == 5) {
 				weaponLevel = 0;

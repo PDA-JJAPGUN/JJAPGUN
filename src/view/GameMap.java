@@ -161,12 +161,15 @@ public class GameMap extends JPanel {
             stageY1 = 0;
             stageY2 = -stageImg.getHeight(null);
             showNextLevelImg();
+            gameFrame.player.setWeaponLevelUp(true);
         }else if(appear == 10000){
             stageIcon = new ImageIcon("images/vsBossStage.jpg");
             stageImg = stageIcon.getImage();
             stageY1 = 0;
             stageY2 = -stageImg.getHeight(null);
             showNextLevelImg();
+            gameFrame.player.setWeaponLevelUp(true);
+
         }
     }
 
