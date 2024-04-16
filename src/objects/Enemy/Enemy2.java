@@ -19,7 +19,7 @@ public class Enemy2 extends Enemy {
         this.y = y;
         this.width = w;
         this.height = h;
-        this.image = new ImageIcon("images/enemy44.png").getImage();
+        this.image = new ImageIcon("images/enemy4.png").getImage();
         this.life = 3;
         this.crushCheck = false;
         this.isThreadLife = true;
