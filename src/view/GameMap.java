@@ -1,14 +1,12 @@
 package view;
 
-import javax.swing.*;
-import objects.boss.Boss;
-
-import objects.Enemy.Enemy;
 import objects.Enemy.Enemy1;
 import objects.Enemy.Enemy2;
 import objects.Enemy.Enemy3;
+import objects.Enemy.EnemyEntity;
+import objects.boss.Boss;
 
-
+import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
 
@@ -17,38 +15,42 @@ public class GameMap extends JPanel {
 
     private GameMap gameMap = this;
     private GameFrame gameFrame;
+
+    private EnemyEntity enemyUnit;
     private Boss boss;
+
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
     private ImageIcon lifeCounticon;
 
-
-    Vector<Enemy> enemyUnits = new Vector<>();
-
-    Enemy enemy;
-    private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
-    private Image bossStageImg = bossStageIcon.getImage();
     private ImageIcon stageIcon = new ImageIcon("images/Stage.png");
     private Image stageImg = stageIcon.getImage();
+
+    private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
+    private Image bossStageImg = bossStageIcon.getImage();
+
+    private ImageIcon titleIcon = new ImageIcon("images/GameTitle.gif");
+    private Image titleImg = titleIcon.getImage();
+
     int stageY1 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
     int stageY2 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
     int bossStageBY1 = -bossStageImg.getHeight(null);
-    int bossStageBY2 = -bossStageImg.getHeight(null) * 2;
+    int bossStageBY2 = -bossStageImg.getHeight(null)*2;
 
     int appear = 1;
-    int score = 100000;
+    int score = 0;
     JLabel la_score;
-    Font font = new Font(null, 1, 40);
+    Font font = new Font(null,1,40);
 
-    public GameMap(GameFrame gameFrame) {
+    Vector<EnemyEntity> enemyUnits = new Vector<>();
+
+    public GameMap(GameFrame gameFrame){
 
         this.gameFrame = gameFrame;
-
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 gameFrame.isgame = true;
-                setLayout(null);
 
                 lifeLaInit();
                 add(laLifecount);
@@ -69,8 +71,10 @@ public class GameMap extends JPanel {
                 add(la_score);
                 setComponentZOrder(la_score, 0);
 
-                while (gameFrame.isgame) {
-                    if (boss == null) {
+                while(gameFrame.isgame){
+                    setLayout(null);
+
+                    if(boss == null){
                         stageY1++;
                         stageY2++;
                         if (stageY1 > stageImg.getHeight(null)) {
@@ -80,9 +84,9 @@ public class GameMap extends JPanel {
                             stageY2 = -stageImg.getHeight(null);
                         }
                     }
-                    if (boss != null) {
-                        if (bossStageBY1 < bossStageImg.getHeight(null) &&
-                                bossStageBY2 < bossStageImg.getHeight(null)) {
+                    if(boss != null){
+                        if(bossStageBY1 < bossStageImg.getHeight(null) &&
+                                bossStageBY2 < bossStageImg.getHeight(null)){
                             stageY1++;
                             stageY2++;
                         }
@@ -96,22 +100,23 @@ public class GameMap extends JPanel {
                         }
                     }
 
-                    try {
+                    try{
                         appear++;
                         lifeCounting();
                         batchEnemy();
+                        crushBorder();
+
                         repaint();
                         Thread.sleep(3);
-                    } catch (Exception e) {
+                    }catch(Exception e){
                         //Handle exception
                     }
                 }
             }
         }).start();
     }
-
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g){
         super.paintComponent(g);
 
         g.drawImage(stageImg, 0, stageY1, null);
@@ -119,79 +124,66 @@ public class GameMap extends JPanel {
         g.drawImage(bossStageImg, 0, bossStageBY1, null);
         g.drawImage(bossStageImg, 0, bossStageBY2, null);
 
-        for (int i = 0; i < enemyUnits.size(); i++) { // null이 아니면 그려라
-            if (enemyUnits.get(i) != null) {
-                enemyUnits.get(i).planeDraw(g);
-            }
+        if (gameFrame.player != null) {
+            gameFrame.player.playerUpdate(g);
         }
 
-        if (boss != null) {
+        if (boss != null){
             boss.bossDraw(g);
         }
 
         repaint();
     }
 
-
-    private void lifeLaInit() {
+    private void lifeLaInit() { // 당장 안 써요. 괜히 만들어달라 했나..
         lifeCounticon = new ImageIcon("images/LifeCount.png");
         laLifecount = new JLabel(lifeCounticon);
         laLifecount2 = new JLabel(lifeCounticon);
         laLifecount3 = new JLabel(lifeCounticon);
-    }
 
+    }
 
     public void lifeCounting() {
-//        if (gameFrame.player.getLife() == 3) {
-//            laLifecount.setVisible(true);
-//            laLifecount2.setVisible(true);
-//            laLifecount3.setVisible(true);
-//            repaint();
-//        } else if (gameFrame.player.getLife() == 2) {
-//            laLifecount.setVisible(true);
-//            laLifecount2.setVisible(true);
-//            laLifecount3.setVisible(false);
-//            repaint();
-//        } else if (gameFrame.player.getLife() == 1) {
-//            laLifecount.setVisible(true);
-//            laLifecount2.setVisible(false);
-//            laLifecount3.setVisible(false);
-//            repaint();
-//        } else {
-//            laLifecount.setVisible(false);
-//            laLifecount2.setVisible(false);
-//            laLifecount3.setVisible(false);
-//            repaint();
-//        }
+        if (gameFrame.player.getLife() == 3) {
+            laLifecount.setVisible(true);
+            laLifecount2.setVisible(true);
+            laLifecount3.setVisible(true);
+            repaint();
+        } else if (gameFrame.player.getLife() == 2) {
+            laLifecount.setVisible(true);
+            laLifecount2.setVisible(true);
+            laLifecount3.setVisible(false);
+            repaint();
+        } else if (gameFrame.player.getLife() == 1) {
+            laLifecount.setVisible(true);
+            laLifecount2.setVisible(false);
+            laLifecount3.setVisible(false);
+            repaint();
+        } else {
+            laLifecount.setVisible(false);
+            laLifecount2.setVisible(false);
+            laLifecount3.setVisible(false);
+            repaint();
+        }
     }
 
-
-    public void batchEnemy() {
-        if (boss == null) {
-            if(appear % 3000 == 0){
-                enemyUnits.add(new Enemy3(600, -200, 100, 100)); // 컨텍스트 넘기기
-                enemyUnits.add(new Enemy2(0, 0, 100, 100));
-            }
-            if (appear % 2000 == 1000 && appear % 3000 != 0) {
-                enemyUnits.add(new Enemy1(50, 0, 50, 50));
-                enemyUnits.add(new Enemy1(100, -50, 50, 50));
-                enemyUnits.add(new Enemy1(150, -100, 50, 50));
-                enemyUnits.add(new Enemy1(200, -150, 50, 50));
-                enemyUnits.add(new Enemy1(250, -200, 50, 50));
-            }
-            if (appear % 2000 == 0 && appear % 3000 != 0){
-                enemyUnits.add(new Enemy1(500, 0, 50, 50));
-                enemyUnits.add(new Enemy1(450, -50, 50, 50));
-                enemyUnits.add(new Enemy1(400, -100, 50, 50));
-                enemyUnits.add(new Enemy1( 350, -150, 50, 50));
-                enemyUnits.add(new Enemy1(300, -200, 50, 50));
-            }
+    public void crushBorder() { // 벽에 충돌하는 조건함수 >> Map 스레드 안에 적용
+        if (gameFrame.player.getX() <= 0) {
+            gameFrame.player.setX(0);
+            repaint();
+        } else if (gameFrame.player.getX() >= 550) {
+            gameFrame.player.setX(550);
+            repaint();
         }
-
-        if (appear == 10000) {
-            boss = new Boss(0, -300);
+        if (gameFrame.player.getY() <= 0) {
+            gameFrame.player.setY(0);
+            repaint();
+        } else if (gameFrame.player.getY() >= 720) {
+            gameFrame.player.setY(720);
+            repaint();
         }
+    }
 
+    public void batchEnemy(){
     }
 }
-
