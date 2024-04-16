@@ -65,7 +65,7 @@ public class Enemy extends JPanel implements Plane {
 
     }
 
-    public void exploseEnemy(Player player, Enemy enemy) { // 충돌후 이미지 변경 및 목숨카운트
+    public void explodeEnemy(Player player, Enemy enemy) { // 충돌후 이미지 변경 및 목숨카운트
         try {
             ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
             player.setIcon(explosionIcon);
@@ -92,7 +92,7 @@ public class Enemy extends JPanel implements Plane {
 
     }
 
-    public void exploseEnemy(Enemy enemyUnit) { // 적기가 아군총알에 충돌시 구현, 오버로딩
+    public void explodeEnemy(Enemy enemyUnit) { // 적기가 아군총알에 충돌시 구현, 오버로딩
 
         try {
             ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
