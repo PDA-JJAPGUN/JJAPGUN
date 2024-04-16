@@ -37,26 +37,6 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public Boolean login(UserEntity userEntity) {
-        // 전달 받은 UserDto에서 ID 가져오기
-        String id = userEntity.getId();
-        // store에서 id에 해당하는 값을 가져오기
-        UserEntity storeUser = store.get(id);
-
-        // store에서 id로 가져온 user가 null이 아니고,
-        // 전달받은 user의 password와 Map에 저장되어있는 password가 같을 경우
-        if (storeUser != null && userEntity.getPassword().equals(storeUser.getPassword())) {
-            // 사용자 인증 성공
-            UserSession.getInstance().setLoggedInUserId(id); // 로그인된 사용자의 ID를 UserSession에 저장
-            // 사용자 인증 성공
-            return true;
-        } else {
-            // 사용자 인증 실패
-            return false;
-        }
-    }
-
-    @Override
     public UserEntity getUser(String id) {
         return store.get(id);
     }
