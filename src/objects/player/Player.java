@@ -21,50 +21,40 @@ public class Player extends JLabel {
 	public UserSession userSession;
 
 	public Player player = this;
-
 	private GameFrame gameFrame;
 	private List<Enemy> enemies = new ArrayList<>();
 	private Boss boss;
-
-	private ImageIcon playerIcon; // 기본 아이콘
-	private ImageIcon playerInvincibleIcon; // 무적 상태 시 아이콘
-
+	private ImageIcon playerIcon;
+	private ImageIcon playerInvincibleIcon;
 	private int width = 70;
 	private int height = 65;
 	private int x = (GameFrame.SCREEN_WIDTH / 2) - (width / 2);
 	private int y = (GameFrame.SCREEN_HEIGHT - (height * 2));
 	private int life = 3;
-	private int bulletSpeed; // 총알 발사 속도
-	private boolean invincible; // 무적 상태
-
+	private int bulletSpeed;
+	private boolean invincible;
 	private int weaponLevel = 0;
-	public int fighterType; // player 선택
-
-	private boolean isAlive = true; // 스레드 생명
-	public boolean isRight = false;
-	public boolean isLeft = false;
-	public boolean isUp = false;
-	public boolean isDown = false;
-	public boolean isAttack = false;
-	public boolean isWeaponLevelUp = false;
-
+	private int fighterType;
+	private boolean isThreadLife = true;
+	private boolean isRight = false;
+	private boolean isLeft = false;
+	private boolean isUp = false;
+	private boolean isDown = false;
+	private boolean isAttack = false;
+	private boolean isWeaponLevelUp = false;
 	public int score = 0;
-
 	private PlayerAttack playerAttack;
 	public List<PlayerAttack> playerBullets = new ArrayList<>();
 
 	public Player(GameFrame gameFrame, String PLANE) {
-
 		this.userService = new UserService();
 		this.userSession = UserSession.getInstance();
 
 		this.gameFrame = gameFrame;
 		playerIcon = new ImageIcon("img/Player" + PLANE + ".png");
 		playerInvincibleIcon = new ImageIcon("img/" + PLANE + "무적.png");
-
 		this.invincible = false;
 
-		System.out.println("img/Player" + PLANE + ".png");
 		if (PLANE.equals("PLANE1")) {
 			fighterType = 1;
 		}
@@ -74,7 +64,6 @@ public class Player extends JLabel {
 		if (PLANE.equals("PLANE3")) {
 			fighterType = 3;
 		}
-
 		setIcon(playerIcon);
 		move();
 	}
@@ -86,7 +75,6 @@ public class Player extends JLabel {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
 
 	public boolean getInvincible() {
 		return invincible;
@@ -140,21 +128,17 @@ public class Player extends JLabel {
 		this.life = life;
 	}
 
-
 	public void setRight(boolean isRight) {
 		this.isRight = isRight;
 	}
-
 
 	public void setLeft(boolean isLeft) {
 		this.isLeft = isLeft;
 	}
 
-
 	public void setUp(boolean isUp) {
 		this.isUp = isUp;
 	}
-
 
 	public void setDown(boolean isDown) {
 		this.isDown = isDown;
@@ -164,27 +148,25 @@ public class Player extends JLabel {
 		this.isAttack = isAttack;
 	}
 
-
 	public ImageIcon getPlayerInvincibleIcon() {
 		return playerInvincibleIcon;
 	}
-
 
 	public void move() {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				bulletSpeed = 0; // count를 0으로 설정
-				while (isAlive) {
+				bulletSpeed = 0;
+				while (isThreadLife) {
 					try {
 						Thread.sleep(5);
 						gameOver();
 						keyProcess();
 						playerAttackProcess();
 						resolveCrash(); // 총알과 적기의 충돌 처리
-						setLocation(x, y); // repaint()
+						setLocation(x, y);
 						setSize(width, height);
-						bulletSpeed++; // 1씩 늘어난다
+						bulletSpeed++;
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -197,19 +179,18 @@ public class Player extends JLabel {
 	}
 
 	private void keyProcess() {
-		if (!invincible && isAttack && bulletSpeed % 30 == 0) { // 총알의 발사 속도를 조절
-			if (weaponLevel == 0) { // 총알 한줄만 발사
-				// 총알이 생성되는 위치, 각도, 발사속도 조절
+		if (!invincible && isAttack && bulletSpeed % 30 == 0) {
+			if (weaponLevel == 0) { // 총알 1줄 발사
 				playerAttack = new PlayerAttack(boss, enemies, x + 20, y - 40, 90, 2);
-				playerBullets.add(playerAttack); // arrayList에 저장한다
+				playerBullets.add(playerAttack);
 			}
-			if (weaponLevel == 1) { // 총알 2줄 발사
+			if (weaponLevel == 1) {
 				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
-			if (weaponLevel == 2) { // 총알 3줄 발사
+			if (weaponLevel == 2) {
 				playerAttack = new PlayerAttack(boss, enemies, x + 0, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 				playerAttack = new PlayerAttack(boss, enemies, x + 20, y - 40, 90, 2);
@@ -217,7 +198,7 @@ public class Player extends JLabel {
 				playerAttack = new PlayerAttack(boss, enemies, x + 40, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
-			if (weaponLevel == 3) { // 총알 4줄 발사
+			if (weaponLevel == 3) {
 				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
@@ -227,7 +208,7 @@ public class Player extends JLabel {
 				playerAttack = new PlayerAttack(boss, enemies, x + 50, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
-			if (weaponLevel == 4) { // 양 옆 대각선으로 나가는 총알 2줄 추가
+			if (weaponLevel == 4) { // 대각선 추가
 				playerAttack = new PlayerAttack(boss, enemies, x - 15, y - 40, 80, 2);
 				playerBullets.add(playerAttack);
 				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
@@ -257,7 +238,7 @@ public class Player extends JLabel {
 		}
 	}
 
-	public void playerUpdate(Graphics g) { // 플레이어에 관한 모든 그림은 여기서 정리한다
+	public void playerUpdate(Graphics g) { // 플레이어에 관한 모든 그림은 여기서 정리
 		playerDraw(g);
 	}
 
@@ -275,7 +256,6 @@ public class Player extends JLabel {
 				g.drawImage(playerAttack.playerBulletImg3, (int) playerAttack.getX(), (int) playerAttack.getY(), 20, 20,
 						null);
 			}
-			// PlayaerAttack의 자료형을 double로 두고, drawImage를 돌릴 때만 형변환 해준다 (삼각함수 계산을 위해)
 		}
 	}
 
@@ -290,9 +270,7 @@ public class Player extends JLabel {
 		this.isWeaponLevelUp = isWepponLevelUp;
 		if (isWepponLevelUp == true && weaponLevel < 6) {
 			weaponLevel = weaponLevel + 1;
-			System.out.println("무기 레벨 : " + weaponLevel);
 			if (weaponLevel == 4) {
-				System.out.println("무기 레벨이 최대입니다");
 			} else if (weaponLevel == 5) {
 				weaponLevel = 0;
 			}
@@ -300,7 +278,6 @@ public class Player extends JLabel {
 	}
 
 	public void addEnemyContext(Enemy enemyUnit) { // 동적으로 생성된 적의 컨텍스트를 받아온다.
-
 		if (enemyUnit != null)
 			this.enemies.add(enemyUnit);
 	}
@@ -315,7 +292,6 @@ public class Player extends JLabel {
 				addScore(crashedEnemy);
 			}
 		}
-
 		// 총알 요소 제거
 		for (int i : toRemove) {
 			playerBullets.remove(i);
@@ -338,7 +314,7 @@ public class Player extends JLabel {
 
 			GameController.getInstance().gameOver(false);
 			gameFrame.change(Panel.GAME_END.name());
-			isAlive = false; //dispose 해도 안의 쓰레드는 살아있다...  이 명령 추가.. 그냥 완전 다 삭제해주는 함수는 없나...
+			isThreadLife = false;
 			gameFrame.isgame = false;
 		}
 	}

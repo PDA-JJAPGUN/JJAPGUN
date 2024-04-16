@@ -10,9 +10,6 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class GameMap extends JPanel {
-
-
-    private GameMap gameMap = this;
     private GameFrame gameFrame;
     private Boss boss;
 
@@ -24,18 +21,14 @@ public class GameMap extends JPanel {
 
     Vector<Enemy> enemyUnits = new Vector<Enemy>();
 
-    Enemy enemy;
-
     private ImageIcon stageIcon = new ImageIcon("images/Stage.jpg");
     private Image stageImg = stageIcon.getImage();
     int stageY1 = 0;
     int stageY2 = -stageImg.getHeight(null);
 
-
     int appear = 1;
     JLabel la_score;
     Font scoreFont = new Font(null,1,20);
-    Font stageFont = new Font(null,1, 30);
 
     public GameMap(GameFrame gameFrame){
 
@@ -82,7 +75,6 @@ public class GameMap extends JPanel {
                         stageY2 = -stageImg.getHeight(null);
                     }
                     try {
-
                         appear++;
                         countLife();
                         updateScore();
@@ -92,7 +84,7 @@ public class GameMap extends JPanel {
                         repaint();
                         Thread.sleep(3);
                     }catch(Exception e){
-                        //Handle exception
+
                     }
                 }
             }
