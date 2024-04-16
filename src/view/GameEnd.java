@@ -43,10 +43,10 @@ public class GameEnd extends GameTitle {
         add(currScore);
 
         JLabel bestScore = createLabel(String.format("BEST SCORE: %d", user.getBestScore()), Color.WHITE, Color.BLACK);
-        bestScore.setBounds(130, setY(50) - 200, 300, 50);  // 위치와 크기 설정
+        bestScore.setBounds(90, setY(50) - 200, 400, 50);  // 위치와 크기 설정
         bestScore.setFont(new Font(null, Font.BOLD, 20));
         bestScore.setHorizontalAlignment(JLabel.CENTER);
-        bestScore.setText("BEST SCORE : ");
+        bestScore.setText("BEST SCORE: " + user.getBestScore());
         add(bestScore);
     }
 
