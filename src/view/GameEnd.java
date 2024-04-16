@@ -46,6 +46,7 @@ public class GameEnd extends GameTitle {
         bestScore.setBounds(130, setY(50) - 200, 300, 50);  // 위치와 크기 설정
         bestScore.setFont(new Font(null, Font.BOLD, 20));
         bestScore.setHorizontalAlignment(JLabel.CENTER);
+        bestScore.setText("BEST SCORE : ");
         add(bestScore);
     }
 
