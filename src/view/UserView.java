@@ -49,24 +49,24 @@ public class UserView extends JFrame implements ActionListener {
         la_bg.setIcon(bgIcon);
         la_bg.setBounds(0, 0, 500, 500);
 
-        la_id.setBounds(50, 50, 200, 40);
-        tf_id.setBounds(150, 50, 150, 40);
+        la_id.setBounds(130, 100, 200, 40);
+        tf_id.setBounds(200, 100, 150, 40);
 
 
-        la_pw.setBounds(50, 100, 200, 40);
-        tf_password.setBounds(150, 100, 150, 40);
+        la_pw.setBounds(130, 150, 200, 40);
+        tf_password.setBounds(200, 150, 150, 40);
 
 
-        la_nickName.setBounds(50, 150, 200, 40);
-        tf_nickname.setBounds(150, 150, 150, 40);
+        la_nickName.setBounds(130, 200, 200, 40);
+        tf_nickname.setBounds(200, 200, 150, 40);
 
 
-        btn_login.setBounds(200, 200, 150, 40);
-        btn_logout.setBounds(200, 200, 150, 40);
-        btn_signup.setBounds(50, 200, 150, 40);
-        btn_start.setBounds(100, 250, 200, 40);
+        btn_login.setBounds(250, 250, 150, 40);
+        btn_logout.setBounds(250, 250, 150, 40);
+        btn_signup.setBounds(100, 250, 150, 40);
+        btn_start.setBounds(150, 300, 200, 40);
 
-        la_result.setBounds(50, 300, 200, 40);
+        la_result.setBounds(200, 350, 200, 40);
 
         add(tf_id);
         add(tf_password);
