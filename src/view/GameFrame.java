@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 import objects.player.Player;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class GameFrame extends JFrame implements ScreenSize {
         listener();
 
         setVisible(true);
+        GameController.getInstance().setGameFrame(this);
     }
 
     public void init() {

@@ -3,6 +3,7 @@ package objects.player;
 import controller.GameController;
 import objects.Enemy.Enemy;
 import objects.boss.Boss;
+import view.Panel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -137,6 +138,7 @@ public class PlayerAttack implements Runnable {
 
 				if (boss.getHp() == 0) {
 					explosePlayer(boss); // 충돌 폭발 메서드
+					GameController.getInstance().gameOver(true);
 				}
 
 				Thread.sleep(10);
@@ -207,8 +209,6 @@ public class PlayerAttack implements Runnable {
 			Thread.sleep(3000);
 
 			System.out.println("보스 처치!!");
-			GameController.getInstance().setGameWin(true);
-			GameController.getInstance().gameEnd();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -145,7 +145,7 @@ public class Bullet implements Runnable{
             }
 
             if (x > 1000 || x < -500 || y < -500 || y > 1000) {
-                 System.out.println("bullet thread terminate");
+//                 System.out.println("bullet thread terminate");
                 isThreadLife = false; // Thread 종료구문
 
             }

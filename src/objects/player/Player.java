@@ -336,7 +336,7 @@ public class Player extends JLabel {
 		if (life <= 0) {
 			userService.saveBestScore(userSession.getLoggedInUserId(), score);
 
-			GameController.getInstance().setGameWin(false);
+			GameController.getInstance().gameOver(false);
 			gameFrame.change(Panel.GAME_END.name());
 			isAlive = false; //dispose 해도 안의 쓰레드는 살아있다...  이 명령 추가.. 그냥 완전 다 삭제해주는 함수는 없나...
 			gameFrame.isgame = false;

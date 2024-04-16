@@ -29,20 +29,35 @@ public class GameController {
 
     private boolean isGameWin = false;
 
-    public boolean isGameWin() {
+    public boolean getIsGameWin() {
         return isGameWin;
     }
 
     public void gameStart() {
-        gameFrame = new GameFrame();
+        new GameFrame();
     }
 
     public void setGameWin(boolean gameWin) {
         isGameWin = gameWin;
     }
 
-    public void gameEnd() {
-        gameFrame.change(Panel.GAME_END.name());
+    public GameFrame getGameFrame() {
+        return gameFrame;
+    }
+
+    public void setGameFrame(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+    }
+
+    public void gameOver(boolean isGameWin) {
+        gameFrame = new GameFrame();
+        setGameWin(isGameWin);
+        if (gameFrame != null) {
+            gameFrame.change(Panel.GAME_END.name());
+        } else {
+            // gameFrame is null. Handle error or re-initialize.
+            System.out.println(gameFrame);
+        }
     }
     public UserEntity getUser() {
         return user;
