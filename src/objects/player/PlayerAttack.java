@@ -131,7 +131,7 @@ public class PlayerAttack implements Runnable {
 				if (collision) {
 					y = -100;
 					boss.setHp(boss.getHp() - 1);
-
+					System.out.println(boss.getHp());
 				}
 
 				if (boss.getHp() == 0) {

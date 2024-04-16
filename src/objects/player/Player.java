@@ -1,7 +1,5 @@
 package objects.player;
 
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
 import objects.Enemy.Enemy;
 import objects.Enemy.Enemy1;
 import objects.Enemy.Enemy2;
@@ -52,8 +50,6 @@ public class Player extends JLabel {
 
 	private PlayerAttack playerAttack;
 	public List<PlayerAttack> playerBullets = new ArrayList<>();
-
-	ArrayList<Integer> check = new ArrayList<>(); // 필요없는 총알 인덱스 체크용
 
 	public Player(GameFrame gameFrame, String PLANE) {
 

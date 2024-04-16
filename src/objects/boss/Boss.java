@@ -24,7 +24,7 @@ public class Boss implements Plane {
     private int hp;
     private boolean isThreadLife = true;
     private int count = 0;
-    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    ArrayList<Bullet> bullets = new ArrayList<>();
     private Bullet bullet;
 
     public Boss(Player player, int x, int y){
@@ -32,6 +32,8 @@ public class Boss implements Plane {
         this.x = x;
         this.y = y;
         this.hp = 100;
+
+        player.addBossContext(boss);
         move();
     }
 
