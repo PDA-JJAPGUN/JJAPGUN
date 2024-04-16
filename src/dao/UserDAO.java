@@ -8,5 +8,8 @@ public interface UserDAO {
     String signup(UserEntity userEntity);
     // 로그인
     Boolean login(UserEntity userEntity);
+
+    //id로 회원 찾기
+    UserEntity findUser(String id);
 }
 

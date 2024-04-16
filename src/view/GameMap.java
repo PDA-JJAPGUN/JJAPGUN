@@ -3,7 +3,14 @@ package view;
 import javax.swing.*;
 import objects.boss.Boss;
 
+import objects.Enemy.Enemy;
+import objects.Enemy.Enemy1;
+import objects.Enemy.Enemy2;
+import objects.Enemy.Enemy3;
+
+
 import java.awt.*;
+import java.util.Vector;
 
 public class GameMap extends JPanel {
 
@@ -13,6 +20,11 @@ public class GameMap extends JPanel {
     private Boss boss;
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
     private ImageIcon lifeCounticon;
+
+
+    Vector<Enemy> enemyUnits = new Vector<>();
+
+    Enemy enemy;
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
     private Image bossStageImg = bossStageIcon.getImage();
     private ImageIcon stageIcon = new ImageIcon("images/Stage.png");
@@ -20,14 +32,14 @@ public class GameMap extends JPanel {
     int stageY1 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
     int stageY2 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
     int bossStageBY1 = -bossStageImg.getHeight(null);
-    int bossStageBY2 = -bossStageImg.getHeight(null)*2;
+    int bossStageBY2 = -bossStageImg.getHeight(null) * 2;
 
     int appear = 1;
     int score = 100000;
     JLabel la_score;
-    Font font = new Font(null,1,40);
+    Font font = new Font(null, 1, 40);
 
-    public GameMap(GameFrame gameFrame){
+    public GameMap(GameFrame gameFrame) {
 
         this.gameFrame = gameFrame;
 
@@ -55,10 +67,10 @@ public class GameMap extends JPanel {
                 la_score.setBounds(425, 0, 150, 50);
                 la_score.setHorizontalAlignment(JLabel.RIGHT);
                 add(la_score);
-                setComponentZOrder(la_score,0);
+                setComponentZOrder(la_score, 0);
 
-                while(gameFrame.isgame){
-                    if(boss == null){
+                while (gameFrame.isgame) {
+                    if (boss == null) {
                         stageY1++;
                         stageY2++;
                         if (stageY1 > stageImg.getHeight(null)) {
@@ -68,9 +80,9 @@ public class GameMap extends JPanel {
                             stageY2 = -stageImg.getHeight(null);
                         }
                     }
-                    if(boss != null){
-                        if(bossStageBY1 < bossStageImg.getHeight(null) &&
-                                bossStageBY2 < bossStageImg.getHeight(null)){
+                    if (boss != null) {
+                        if (bossStageBY1 < bossStageImg.getHeight(null) &&
+                                bossStageBY2 < bossStageImg.getHeight(null)) {
                             stageY1++;
                             stageY2++;
                         }
@@ -84,21 +96,22 @@ public class GameMap extends JPanel {
                         }
                     }
 
-                    try{
+                    try {
                         appear++;
                         lifeCounting();
                         batchEnemy();
                         repaint();
                         Thread.sleep(3);
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         //Handle exception
                     }
                 }
             }
         }).start();
     }
+
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         g.drawImage(stageImg, 0, stageY1, null);
@@ -106,8 +119,13 @@ public class GameMap extends JPanel {
         g.drawImage(bossStageImg, 0, bossStageBY1, null);
         g.drawImage(bossStageImg, 0, bossStageBY2, null);
 
+        for (int i = 0; i < enemyUnits.size(); i++) { // null이 아니면 그려라
+            if (enemyUnits.get(i) != null) {
+                enemyUnits.get(i).planeDraw(g);
+            }
+        }
 
-        if (boss != null){
+        if (boss != null) {
             boss.bossDraw(g);
         }
 
@@ -148,22 +166,32 @@ public class GameMap extends JPanel {
     }
 
 
-    public void batchEnemy(){
-        if(appear == 3000){
+    public void batchEnemy() {
+        if (boss == null) {
+            if(appear % 3000 == 0){
+                enemyUnits.add(new Enemy3(600, -200, 100, 100)); // 컨텍스트 넘기기
+                enemyUnits.add(new Enemy2(0, 0, 100, 100));
+            }
+            if (appear % 2000 == 1000 && appear % 3000 != 0) {
+                enemyUnits.add(new Enemy1(50, 0, 50, 50));
+                enemyUnits.add(new Enemy1(100, -50, 50, 50));
+                enemyUnits.add(new Enemy1(150, -100, 50, 50));
+                enemyUnits.add(new Enemy1(200, -150, 50, 50));
+                enemyUnits.add(new Enemy1(250, -200, 50, 50));
+            }
+            if (appear % 2000 == 0 && appear % 3000 != 0){
+                enemyUnits.add(new Enemy1(500, 0, 50, 50));
+                enemyUnits.add(new Enemy1(450, -50, 50, 50));
+                enemyUnits.add(new Enemy1(400, -100, 50, 50));
+                enemyUnits.add(new Enemy1( 350, -150, 50, 50));
+                enemyUnits.add(new Enemy1(300, -200, 50, 50));
+            }
+        }
+
+        if (appear == 10000) {
             boss = new Boss(0, -300);
         }
-        if(appear == 2000*30){
-            boss = new Boss(0, -300);
-        }
-        if(appear == 3000*30){
-            boss = new Boss(0, -300);
-        }
-        if(appear == 4000*30){
-            boss = new Boss(0, -300);
-        }
-        if(appear == 5000*30){
-            boss = new Boss(0, -300);
-        }
+
     }
 }
 
