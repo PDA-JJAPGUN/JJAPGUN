@@ -30,7 +30,7 @@ public class GameEnd extends GameTitle {
         add(exitBtn);
 
 
-        JLabel gameResult = createLabel((gameController.isGameWin())? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
+        JLabel gameResult = createLabel(gameController.isGameWin ? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
         gameResult.setFont(new Font(null, Font.BOLD, 40));
         gameResult.setBounds(180,  400, 300, 100);  // 위치와 크기 설정
         add(gameResult);

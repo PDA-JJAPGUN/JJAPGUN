@@ -27,7 +27,7 @@ public class GameController {
     UserEntity user;
     GameFrame gameFrame;
 
-    private boolean isGameWin = false;
+    public boolean isGameWin = false;
 
     public boolean getIsGameWin() {
         return isGameWin;
