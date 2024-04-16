@@ -26,7 +26,7 @@ public class SelectPlayer extends JPanel implements ScreenSize {
 
         this.gameFrame = gameFrame;
 
-        player1Icon = new ImageIcon("img/PlayerPlane1.png");
+        player1Icon = new ImageIcon("images/PlayerPlane1.png");
         player2Icon = new ImageIcon("img/PlayerPlane2.png");
         player3Icon = new ImageIcon("img/PlayerPlane3.png");
 
