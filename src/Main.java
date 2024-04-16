@@ -6,6 +6,6 @@ import view.GameFrame;
 
 public class Main {
     public static void main(String[] args) {
-        new UserController(new UserService(), GameController.getInstance());
+        UserController instance = UserController.getInstance();
     }
 }

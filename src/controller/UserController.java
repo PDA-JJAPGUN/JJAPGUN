@@ -8,14 +8,23 @@ import session.UserSession;
 import view.UserView;
 
 public class UserController {
+    public static UserController instance;
+
     UserService userService;
     UserSession userSession;
     GameController gameController;
 
-    public UserController(UserService userService, GameController gameController) {
+    private UserController(UserService userService, GameController gameController) {
         this.userService = userService;
         this.gameController = gameController;
         new UserView(this);
+    }
+
+    public static UserController getInstance() {
+        if (instance == null) {
+            instance = new UserController(new UserService(), GameController.getInstance());
+        }
+        return instance;
     }
 
     public String signup(SignupDto signUpDto) {
@@ -30,5 +39,4 @@ public class UserController {
         String userId = userSession.getLoggedInUserId();
         return userService.getUser(userId);
     }
-
 }

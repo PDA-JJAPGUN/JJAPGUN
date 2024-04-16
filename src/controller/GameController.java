@@ -41,8 +41,15 @@ public class GameController {
         isGameWin = gameWin;
     }
 
+    public void gameEnd() {
+        gameFrame.change(Panel.GAME_END.name());
+    }
+
     public void setGameFrame(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
+    }
+    public int getFinalScore() {
+        return gameFrame.player.score;
     }
 
     public void gameOver(boolean isGameWin) {
