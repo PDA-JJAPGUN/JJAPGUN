@@ -1,15 +1,22 @@
 package view;
 
 import controller.GameController;
+<<<<<<< HEAD
 import controller.UserController;
+=======
+>>>>>>> 56ac09d0211c615064ada103549a1bda38399153
 
 import javax.swing.*;
 import java.awt.*;
 
 
 public class GameEnd extends GameTitle {
+<<<<<<< HEAD
 
     public GameEnd(GameFrame gameFrame, boolean isGameWin) {
+=======
+    public GameEnd(GameFrame gameFrame) {
+>>>>>>> 56ac09d0211c615064ada103549a1bda38399153
         super(gameFrame);
 
         setLayout(null);
@@ -24,7 +31,7 @@ public class GameEnd extends GameTitle {
         add(exitBtn);
 
 
-        JLabel gameResult = createLabel((isGameWin)? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
+        JLabel gameResult = createLabel((GameController.getInstance().isGameWin())? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
         gameResult.setFont(new Font(null, Font.BOLD, 40));
         gameResult.setBounds(setX(300)-10,  setY(100) - 330, 300, 100);  // 위치와 크기 설정
         add(gameResult);

@@ -1,5 +1,6 @@
 package objects.player;
 
+import controller.GameController;
 import objects.Enemy.Enemy;
 import objects.Enemy.Enemy1;
 import objects.Enemy.Enemy2;
@@ -8,6 +9,7 @@ import objects.boss.Boss;
 import service.UserService;
 import session.UserSession;
 import view.GameFrame;
+import view.Panel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -334,10 +336,10 @@ public class Player extends JLabel {
 		if (life <= 0) {
 			userService.saveBestScore(userSession.getLoggedInUserId(), score);
 
+			GameController.getInstance().setGameWin(false);
+			gameFrame.change(Panel.GAME_END.name());
 			isAlive = false; //dispose 해도 안의 쓰레드는 살아있다...  이 명령 추가.. 그냥 완전 다 삭제해주는 함수는 없나...
 			gameFrame.isgame = false;
-			gameFrame.dispose();
-			new GameFrame();
 		}
 	}
 
