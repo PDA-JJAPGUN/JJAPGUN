@@ -1,7 +1,7 @@
 package objects.Enemy;
 
-import com.sun.tools.jconsole.JConsoleContext;
 import objects.Bullet;
+import objects.player.Player;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -16,8 +16,8 @@ public class Enemy3 extends Enemy{
     ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     private Bullet bullet;
 
-    public Enemy3(int x, int y, int w, int h) {
-//        this.player = player;
+    public Enemy3(Player player, int x, int y, int w, int h) {
+        this.player = player;
         this.x = x;
         this.y = y;
         this.width = w;
@@ -30,7 +30,7 @@ public class Enemy3 extends Enemy{
 //        this.player.contextAdd(enemy3);
 
         this.move();
-//        this.crush();
+        this.crush();
 
     }
 
@@ -66,43 +66,43 @@ public class Enemy3 extends Enemy{
         }).start();
     }
 
-//    public void crush() { // 적비행기-Player 충돌
-//
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//
-//                while (!player.getInvincible() && y < 900 && y > -300) {
-//
-//                    if (Math.abs((player.getX() + player.getWidth() / 2) - (x + player.getWidth() / 2)) < (width / 2
-//                            + player.getWidth() / 2)
-//                            && Math.abs((player.getY() + player.getHeight() / 2) - (y + height / 2)) < (height / 2
-//                            + player.getHeight() / 2)) {
-//                        collision = true;
-//                    } else {
-//                        collision = false;
-//                    }
-//
-//                    try {
-//                        if (collision) {
-//                            exploseEnemy(player, enemy3); // 충돌 폭발 메서드
-//                        }
-//                        Thread.sleep(10);
-//
-//                        if (crushCheck) {
-//                            exploseEnemy(enemy3);
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//
-//            }
-//        }).start();
-//
-//    }
+    public void crush() { // 적비행기-Player 충돌
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                while (!player.getInvincible() && y < 900 && y > -300) {
+
+                    if (Math.abs((player.getX() + player.getWidth() / 2) - (x + player.getWidth() / 2)) < (width / 2
+                            + player.getWidth() / 2)
+                            && Math.abs((player.getY() + player.getHeight() / 2) - (y + height / 2)) < (height / 2
+                            + player.getHeight() / 2)) {
+                        collision = true;
+                    } else {
+                        collision = false;
+                    }
+
+                    try {
+                        if (collision) {
+                            exploseEnemy(player, enemy3); // 충돌 폭발 메서드
+                        }
+                        Thread.sleep(10);
+
+                        if (crushCheck) {
+                            exploseEnemy(enemy3);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }).start();
+
+    }
 
     public void bulletCreate() {
         if (count % 100 == 0 && count <400) {

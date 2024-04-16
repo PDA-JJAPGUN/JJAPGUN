@@ -1,9 +1,6 @@
 package view;
 
-import objects.Enemy.Enemy1;
-import objects.Enemy.Enemy2;
-import objects.Enemy.Enemy3;
-import objects.Enemy.EnemyEntity;
+import objects.Enemy.*;
 import objects.boss.Boss;
 
 import javax.swing.*;
@@ -22,9 +19,9 @@ public class GameMap extends JPanel {
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
     private ImageIcon lifeCounticon;
 
-    private ImageIcon stageIcon = new ImageIcon("images/Stage.png");
-    private Image stageImg = stageIcon.getImage();
+    Vector<Enemy> enemyUnits = new Vector<Enemy>();
 
+    Enemy enemy;
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
     private Image bossStageImg = bossStageIcon.getImage();
 
@@ -39,7 +36,6 @@ public class GameMap extends JPanel {
     JLabel la_score;
     Font font = new Font(null,1,40);
 
-    Vector<EnemyEntity> enemyUnits = new Vector<>();
 
     public GameMap(GameFrame gameFrame){
 
@@ -95,7 +91,7 @@ public class GameMap extends JPanel {
             }
         }).start();
     }
-  
+
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -107,6 +103,11 @@ public class GameMap extends JPanel {
             gameFrame.player.playerUpdate(g);
         }
 
+        for (int i = 0; i < enemyUnits.size(); i++) { // null이 아니면 그려라
+            if (enemyUnits.get(i) != null) {
+                enemyUnits.get(i).planeDraw(g);
+            }
+        }
         if (boss != null){
             boss.bossDraw(g);
         }
@@ -164,24 +165,30 @@ public class GameMap extends JPanel {
 
     public void batchEnemy() {
         if (boss == null) {
-            if(appear % 3000 == 0){
-                enemyUnits.add(new Enemy3(600, -200, 100, 100)); // 컨텍스트 넘기기
-                enemyUnits.add(new Enemy2(0, 0, 100, 100));
+            if (appear % 3000 == 0) {
+                enemyUnits.add(new Enemy3(gameFrame.player, 600, -200, 100, 100)); // 컨텍스트 넘기기
+                enemyUnits.add(new Enemy2(gameFrame.player, 0, 0, 100, 100));
             }
             if (appear % 2000 == 1000 && appear % 3000 != 0) {
-                enemyUnits.add(new Enemy1(50, 0, 50, 50));
-                enemyUnits.add(new Enemy1(100, -50, 50, 50));
-                enemyUnits.add(new Enemy1(150, -100, 50, 50));
-                enemyUnits.add(new Enemy1(200, -150, 50, 50));
-                enemyUnits.add(new Enemy1(250, -200, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 50, 0, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 100, -50, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 150, -100, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 200, -150, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 250, -200, 50, 50));
             }
-            if (appear % 2000 == 0 && appear % 3000 != 0){
-                enemyUnits.add(new Enemy1(500, 0, 50, 50));
-                enemyUnits.add(new Enemy1(450, -50, 50, 50));
-                enemyUnits.add(new Enemy1(400, -100, 50, 50));
-                enemyUnits.add(new Enemy1( 350, -150, 50, 50));
-                enemyUnits.add(new Enemy1(300, -200, 50, 50));
+            if (appear % 2000 == 0 && appear % 3000 != 0) {
+                enemyUnits.add(new Enemy1(gameFrame.player, 500, 0, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 450, -50, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 400, -100, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 350, -150, 50, 50));
+                enemyUnits.add(new Enemy1(gameFrame.player, 300, -200, 50, 50));
             }
+        }
+        if (appear == 10000) {
+            boss = new Boss(0, -300);
+        }
+    }
+
 
     public void crushBorder() { // 벽에 충돌하는 조건함수 >> Map 스레드 안에 적용
         if (gameFrame.player.getX() <= 0) {
