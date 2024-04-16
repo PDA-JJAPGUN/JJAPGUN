@@ -119,7 +119,7 @@ public class GameMap extends JPanel {
             boss.planeDraw(g);
         }
 
-        la_stage.setLocation(100, 200);
+        la_stage.setLocation(50, 200);
         repaint();
     }
 
@@ -179,7 +179,7 @@ public class GameMap extends JPanel {
     }
 
     public void showNextLevelImg(){
-        la_stage.setBounds(200, 200, 500, 350);
+        la_stage.setBounds(100, 200, 500, 350);
 
         // Timer를 사용하여 5초 후에 JLabel을 숨김
         Timer timer = new Timer(500, new ActionListener() {
