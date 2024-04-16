@@ -41,10 +41,6 @@ public class GameController {
         isGameWin = gameWin;
     }
 
-    public GameFrame getGameFrame() {
-        return gameFrame;
-    }
-
     public void setGameFrame(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
     }
@@ -54,12 +50,8 @@ public class GameController {
         if (gameFrame != null) {
             gameFrame.change(Panel.GAME_END.name());
         } else {
-            // gameFrame is null. Handle error or re-initialize.
             System.out.println(gameFrame);
         }
-    }
-    public UserEntity getUser() {
-        return user;
     }
 
     public List<UserEntity> getRanks() {
