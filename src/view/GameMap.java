@@ -5,36 +5,30 @@ import objects.boss.Boss;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class GameMap extends JPanel {
-
-
-    private GameMap gameMap = this;
     private GameFrame gameFrame;
-
-    private Enemy enemyUnit;
     private Boss boss;
 
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
     private ImageIcon lifeCounticon;
 
-    Vector<Enemy> enemyUnits = new Vector<Enemy>();
+    ImageIcon nextStageIcon = new ImageIcon("images/NextStage.png");
+    private JLabel la_stage;
 
-    Enemy enemy;
-    private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
-    private Image bossStageImg = bossStageIcon.getImage();
+    public Vector<Enemy> enemyUnits = new Vector<Enemy>();
 
     private ImageIcon stageIcon = new ImageIcon("images/Stage.jpg");
     private Image stageImg = stageIcon.getImage();
     int stageY1 = 0;
     int stageY2 = -stageImg.getHeight(null);
 
-
     int appear = 1;
     JLabel la_score;
-    Font font = new Font(null,1,20);
-
+    Font scoreFont = new Font(null,1,20);
 
     public GameMap(GameFrame gameFrame){
 
@@ -58,12 +52,18 @@ public class GameMap extends JPanel {
 
                 la_score = new JLabel("SCORE: 0");
                 la_score.setForeground(Color.WHITE);
-                la_score.setFont(font);
+                la_score.setFont(scoreFont);
                 la_score.setBounds(350, 0, 150, 50);
                 la_score.setHorizontalAlignment(JLabel.RIGHT);
                 add(la_score);
                 setComponentZOrder(la_score, 0);
 
+                la_stage = new JLabel();
+                la_stage.setIcon(nextStageIcon);
+                la_stage.setBounds(0, 200, 500, 350);
+                add(la_stage);
+                setComponentZOrder(la_stage, 0);
+                la_stage.setVisible(false);
 
                 while (gameFrame.isgame) {
                     stageY1++;
@@ -75,7 +75,6 @@ public class GameMap extends JPanel {
                         stageY2 = -stageImg.getHeight(null);
                     }
                     try {
-
                         appear++;
                         countLife();
                         updateScore();
@@ -85,7 +84,7 @@ public class GameMap extends JPanel {
                         repaint();
                         Thread.sleep(3);
                     }catch(Exception e){
-                        //Handle exception
+
                     }
                 }
             }
@@ -112,6 +111,7 @@ public class GameMap extends JPanel {
             boss.planeDraw(g);
         }
 
+        la_stage.setLocation(50, 200);
         repaint();
     }
 
@@ -160,13 +160,60 @@ public class GameMap extends JPanel {
             stageImg = stageIcon.getImage();
             stageY1 = 0;
             stageY2 = -stageImg.getHeight(null);
+            showNextLevelImg();
+            gameFrame.player.setWeaponLevelUp(true);
         }else if(appear == 10000){
             stageIcon = new ImageIcon("images/vsBossStage.jpg");
             stageImg = stageIcon.getImage();
             stageY1 = 0;
             stageY2 = -stageImg.getHeight(null);
-        }
+            showNextLevelImg();
+            gameFrame.player.setWeaponLevelUp(true);
 
+        }
+    }
+
+    public void showNextLevelImg(){
+        la_stage.setBounds(100, 200, 500, 350);
+
+        // Timer를 사용하여 5초 후에 JLabel을 숨김
+        Timer timer = new Timer(500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                la_stage.setVisible(true);
+                ((Timer)e.getSource()).stop();
+            }
+        });
+        timer.setRepeats(false); // 한 번만 실행하도록 설정
+        timer.start(); // Timer 시작
+
+        // Timer를 사용하여 5초 후에 JLabel을 숨김
+        Timer timer2 = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                la_stage.setVisible(false);
+                ((Timer)e.getSource()).stop();
+            }
+        });
+        timer2.setRepeats(false); // 한 번만 실행하도록 설정
+        timer2.start(); // Timer 시작
+
+        Timer timer3 = new Timer(1500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                la_stage.setVisible(true);
+                ((Timer)e.getSource()).stop();
+            }
+        });
+        timer3.setRepeats(false); // 한 번만 실행하도록 설정
+        timer3.start(); // Timer 시작
+
+        // Timer를 사용하여 5초 후에 JLabel을 숨김
+        Timer timer4 = new Timer(2000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                la_stage.setVisible(false);
+                ((Timer)e.getSource()).stop();
+            }
+        });
+        timer4.setRepeats(false); // 한 번만 실행하도록 설정
+        timer4.start(); // Timer 시작
     }
 
     public void batchEnemy() {

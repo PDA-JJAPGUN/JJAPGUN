@@ -1,5 +1,5 @@
 package view;
 
 public enum ActionCommand {
-    START, RANK, EXIT;
+    START, RANK, EXIT, X;
 }

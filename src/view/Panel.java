@@ -5,4 +5,5 @@ public enum Panel {
     GAME_SELECT_PLAYER,
     GAME_MAP,
     GAME_END,
+    GAME_RANK,
 }

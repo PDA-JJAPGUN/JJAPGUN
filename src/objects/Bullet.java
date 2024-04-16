@@ -8,31 +8,25 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Bullet implements Runnable{
-
-    private GameFrame gameFrame;
-    
     private Player player;
     private boolean collision;
 
     public Image bulletImg1 = new ImageIcon("images/bullet1.png").getImage();
     public Image bulletImg2 = new ImageIcon("images/bullet2.png").getImage();
-    public Image bulletImg3 = new ImageIcon("images/bullet3.png").getImage();
     public Image bulletImg4 = new ImageIcon("images/bullet4.png").getImage();
-    public Image bulletImg5 = new ImageIcon("images/missle.png").getImage();
 
     private int x;
     private int y;
-    private double angel = 270; // 총알각도
-    private double speed = 2; // 총알속도
+    private double angel = 270;
+    private double speed = 2;
     private int width;
     private int height;
+    private int b1Width = bulletImg1.getWidth(null);
+    private int b1Height = bulletImg1.getHeight(null);
 
     private boolean isThreadLife;
 
-    public int b1Width = bulletImg1.getWidth(null);
-    public int b1Height = bulletImg1.getHeight(null);
     public Bullet(Player player, int x, int y, double angel, double speed, int width, int height) {
-
         this.player = player;
         this.x = x;
         this.y = y;
@@ -41,20 +35,11 @@ public class Bullet implements Runnable{
         this.width = width;
         this.height = height;
         this.isThreadLife = true;
-
         this.collision = false;
 
-       Thread bulletthread = new Thread(this); // 총알 충돌 thread 생성, 실행
+       Thread bulletthread = new Thread(this);
        bulletthread.setName("EnemyBullet");
        bulletthread.start();
-    }
-
-    public view.GameFrame getGameFrame() {
-        return gameFrame;
-    }
-
-    public void setGameFrame(view.GameFrame gameFrame) {
-        this.gameFrame = gameFrame;
     }
 
     public Player getPlayer() {
@@ -63,20 +48,6 @@ public class Bullet implements Runnable{
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-
-    public void setThreadLife(boolean threadLife) {
-        isThreadLife = threadLife;
-    }
-
-
-    public boolean isCollision() {
-        return collision;
-    }
-
-    public void setCollision(boolean collision) {
-        this.collision = collision;
     }
 
     public int getX() {
@@ -89,26 +60,6 @@ public class Bullet implements Runnable{
 
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public double getAngel() {
-        return angel;
-    }
-
-    public void setAngel(double angel) {
-        this.angel = angel;
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(double speed) {
-        this.speed = speed;
     }
 
     public int getWidth() {
@@ -127,16 +78,22 @@ public class Bullet implements Runnable{
         this.height = height;
     }
 
-    public void fire() throws InterruptedException { // 총알 발사
+    public int getB1Width() {
+        return b1Width;
+    }
+
+    public int getB1Height() {
+        return b1Height;
+    }
+
+    public void fire() throws InterruptedException {
         x -= Math.cos(Math.toRadians(angel)) * speed;
         y -= Math.sin(Math.toRadians(angel)) * speed;
         Thread.sleep(10);
-
     }
 
     @Override
     public void run() {
-
         while (isThreadLife) {
             try {
                 fire();
@@ -145,22 +102,16 @@ public class Bullet implements Runnable{
             }
 
             if (x > 1000 || x < -500 || y < -500 || y > 1000) {
-                 System.out.println("bullet thread terminate");
-                isThreadLife = false; // Thread 종료구문
-
+                isThreadLife = false;
             }
 
-            if (!player.getInvincible()) { // 무적상태가 아니면
-
+            if (!player.getInvincible()) {
                 crash();
-
                 try {
                     if (collision) {
-                        explosePlayer(player); // 충돌 폭발 메서드
+                        explodePlayer(player);
                     }
                     Thread.sleep(10);
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -168,7 +119,8 @@ public class Bullet implements Runnable{
         }
     }
 
-    public void crash() { // 적 총알이 아군 비행기에 부딪쳤을 시 충돌연산
+    // 적 총알이 사용자 비행기에 닿았는지
+    public void crash() {
         if (Math.abs(
                 ((player.getX() - 11) + player.getWidth() / 3) - (x + width / 3)) < (width / 3 + player.getWidth() / 3)
                 && Math.abs(((player.getY() - 5) + player.getHeight() / 3) - (y + height / 3)) < (height / 3
@@ -179,36 +131,26 @@ public class Bullet implements Runnable{
         }
     }
 
-    public void explosePlayer(Player player) { // 충돌후 이미지 변경 및 목숨카운트
-
+    public void explodePlayer(Player player) {
         try {
             ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
             player.setIcon(explosionIcon);
-
-
-            y = 1000; // 가비지 컬렉션으로만 가능, 강제로 제거하려면 finallize 함수
-
-
-            player.setInvincible(true); // 무적상태
-            Thread.sleep(1000);
-
+            y = 1000;
+            player.setInvincible(true);
+            Thread.sleep(100);
             player.setIcon(player.getPlayerInvincibleIcon());
             player.setLife(player.getLife() - 1);
-            System.out.println("남은목숨:" + player.getLife());
+
             player.setX(200);
             player.setY(520);
-
-            Thread.sleep(1500);
-
+            Thread.sleep(300);
             player.setIcon(player.getPlayerIcon());
             player.setInvincible(false);
 
             player.repaint();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
 }

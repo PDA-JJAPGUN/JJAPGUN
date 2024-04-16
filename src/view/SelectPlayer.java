@@ -12,11 +12,10 @@ import java.awt.event.MouseEvent;
 public class SelectPlayer extends JPanel implements ScreenSize {
 
     private GameFrame gameFrame;
-    private SelectPlayer selectPlayer = this;
     private ImageIcon player1Icon, player2Icon, player3Icon; // 플레이어 기체 이미지
     private ImageIcon planeDetailIcon1, planeDetailIcon2, planeDetailIcon3; // 기체 상세설명 이미지
     private ImageIcon bigPlayer1icon, bigPlayer2icon, bigPlayer3icon; // 버튼 누를시 커지는 이미지
-    private ImageIcon selectPlaneIcon = new ImageIcon("img/SelectPlane1.png");
+    private ImageIcon selectPlaneIcon = new ImageIcon("images/SelectPlane1.png");
     private Image selectPlaneImg = selectPlaneIcon.getImage();
 
 
@@ -26,17 +25,17 @@ public class SelectPlayer extends JPanel implements ScreenSize {
 
         this.gameFrame = gameFrame;
 
-        player1Icon = new ImageIcon("img/PlayerPlane1.png");
-        player2Icon = new ImageIcon("img/PlayerPlane2.png");
-        player3Icon = new ImageIcon("img/PlayerPlane3.png");
+        player1Icon = new ImageIcon("images/PlayerPlane1.png");
+        player2Icon = new ImageIcon("images/PlayerPlane2.png");
+        player3Icon = new ImageIcon("images/PlayerPlane3.png");
 
-        bigPlayer1icon = new ImageIcon("img/BigPlane1.png");
-        bigPlayer2icon = new ImageIcon("img/BigPlane2.png");
-        bigPlayer3icon = new ImageIcon("img/BigPlane3.png");
+        bigPlayer1icon = new ImageIcon("images/BigPlane1.png");
+        bigPlayer2icon = new ImageIcon("images/BigPlane2.png");
+        bigPlayer3icon = new ImageIcon("images/BigPlane3.png");
 
-        planeDetailIcon1 = new ImageIcon("img/PlaneDetailImg1.png");
-        planeDetailIcon2 = new ImageIcon("img/PlaneDetailImg2.png");
-        planeDetailIcon3 = new ImageIcon("img/PlaneDetailImg3.png");
+        planeDetailIcon1 = new ImageIcon("images/PlaneDetailImg1.png");
+        planeDetailIcon2 = new ImageIcon("images/PlaneDetailImg2.png");
+        planeDetailIcon3 = new ImageIcon("images/PlaneDetailImg3.png");
 
         JButton btn1 = new JButton("", player1Icon);
         JButton btn2 = new JButton("", player2Icon);
@@ -58,8 +57,7 @@ public class SelectPlayer extends JPanel implements ScreenSize {
         btn2.setOpaque(false);
         btn3.setOpaque(false);
 
-        // 버튼 액션
-        btn1.addMouseListener(new MouseAdapter() { // 버튼 클릭 리스너
+        btn1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameFrame.change(Panel.GAME_MAP.name());
@@ -80,6 +78,7 @@ public class SelectPlayer extends JPanel implements ScreenSize {
                 btn1.setIcon(player1Icon);
             }
         });
+
         btn2.addMouseListener(new MouseAdapter() { // 버튼 클릭 리스너
             @Override
             public void mousePressed(MouseEvent e) {
@@ -102,7 +101,7 @@ public class SelectPlayer extends JPanel implements ScreenSize {
             }
         });
 
-        btn3.addMouseListener(new MouseAdapter() { // 버튼 클릭 리스너
+        btn3.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameFrame.change(Panel.GAME_MAP.name());
@@ -142,8 +141,7 @@ public class SelectPlayer extends JPanel implements ScreenSize {
         repaint();
     }
 
-
-    public void batch(String playerPlane) { // 비행기 선택 후 비행기 new add
+    public void batch(String playerPlane) {
         if (playerPlane.equals("playerPlane")) {
             gameFrame.player = new Player(gameFrame,"PLANE1");
             gameFrame.gameMap.add(gameFrame.player);
@@ -155,7 +153,5 @@ public class SelectPlayer extends JPanel implements ScreenSize {
             gameFrame.gameMap.add(gameFrame.player);
         }
     }
-
-
 
 }

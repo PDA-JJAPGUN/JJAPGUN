@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameController;
 import objects.player.Player;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class GameFrame extends JFrame implements ScreenSize {
     public GameMap gameMap;
     public GameStart gameStart;
     public GameEnd gameEnd;
+    public GameRank gameRank;
     public SelectPlayer selectPlayer;
     public Player player;
     public boolean isgame;
@@ -24,6 +26,7 @@ public class GameFrame extends JFrame implements ScreenSize {
         listener();
 
         setVisible(true);
+        GameController.getInstance().setGameFrame(this);
     }
 
     public void init() {
@@ -52,9 +55,13 @@ public class GameFrame extends JFrame implements ScreenSize {
                 getContentPane().add(gameMap);
                 break;
             case GAME_END:
-                gameEnd = new GameEnd(gameFrame, false);
+                gameEnd = new GameEnd(gameFrame);
                 getContentPane().add(gameEnd);
                 System.out.println("sssssssssssssss");
+                break;
+            case GAME_RANK:
+                gameRank = new GameRank(gameFrame);
+                getContentPane().add(gameRank);
                 break;
             case GAME_SELECT_PLAYER:
                 selectPlayer = new SelectPlayer(gameFrame);
@@ -71,9 +78,6 @@ public class GameFrame extends JFrame implements ScreenSize {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_1:
-                        player.setWeaponLevelUp(true);
-                        break;
                     case KeyEvent.VK_SPACE:
                         player.setAttack(true);
                         break;
