@@ -29,17 +29,24 @@ public class GameController {
 
     private boolean isGameWin = false;
 
-    public boolean isGameWin() {
+    public boolean getIsGameWin() {
         return isGameWin;
     }
 
     public void gameStart() {
-        gameFrame = new GameFrame();
-        System.out.println("set GameFrame");
+        new GameFrame();
     }
 
     public void setGameWin(boolean gameWin) {
         isGameWin = gameWin;
+    }
+
+    public GameFrame getGameFrame() {
+        return gameFrame;
+    }
+
+    public void setGameFrame(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
     }
 
     public void gameOver(boolean isGameWin) {
