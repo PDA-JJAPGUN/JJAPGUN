@@ -47,8 +47,8 @@ public class UserView extends JFrame implements ActionListener {
         tf_nickname.setBounds(150, 150, 150, 40);
 
 
-        btn_login.setBounds(50, 200, 150, 40);
-        btn_signup.setBounds(200, 200, 150, 40);
+        btn_login.setBounds(200, 200, 150, 40);
+        btn_signup.setBounds(50, 200, 150, 40);
         btn_start.setBounds(100, 250, 200, 40);
 
         la_result.setBounds(50, 300, 200, 40);

@@ -73,12 +73,12 @@ public class Enemy1 extends Enemy {
 
                     try {
                         if (collision) {
-                            exploseEnemy(player, enemy1); // 플레이어와 적기 충돌시
+                            explodeEnemy(player, enemy1); // 플레이어와 적기 충돌시
                             break;
                         }
 
                         if (crushCheck) {
-                            exploseEnemy(enemy1); // 플레이어 총알이 적기 충돌시
+                            explodeEnemy(enemy1); // 플레이어 총알이 적기 충돌시
                             break;
                         }
                         Thread.sleep(10);
