@@ -24,7 +24,14 @@ public class UserService {
 
         UserEntity userEntity = new UserEntity(id, password);
         boolean isLogin = userDao.login(userEntity);
-        if (isLogin) gameController.gameStart(userDao.getUser(id));
+
+        if (isLogin) gameController.setUser(userDao.findUser(id));
         return isLogin;
+    }
+
+    public void saveBestScore(String id, int score) {
+        UserEntity user = userDao.findUser(id);
+        user.setBestScore(score);
+        userDao.saveUser(user);
     }
 }

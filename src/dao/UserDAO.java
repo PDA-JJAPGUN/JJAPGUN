@@ -16,5 +16,7 @@ public interface UserDAO {
 
     //모든 회원 찾기
     List<UserEntity> getUsers();
+
+    void saveUser(UserEntity user);
 }
 

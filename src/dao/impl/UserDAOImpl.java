@@ -65,5 +65,10 @@ public class UserDAOImpl implements UserDAO{
     public List<UserEntity> getUsers() {
         return new ArrayList<>(store.values());
     }
+    
+    public void saveUser(UserEntity user) {
+        store.put(user.getId(), user);
+    }
+
 
 }

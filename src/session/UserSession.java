@@ -25,6 +25,10 @@ public class UserSession {
         System.out.println("로그아웃 되었습니다.");
     }
 
+    public void startGame(){
+
+    }
+
     // 현재 로그인된 사용자의 ID를 반환하는 메소드
     public String getLoggedInUserId() {
         return loggedInUserId;

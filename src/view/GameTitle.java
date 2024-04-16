@@ -1,12 +1,9 @@
 package view;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
-
-import javax.swing.*;
 
 public class GameTitle extends JPanel implements ScreenSize, ActionListener {
 
@@ -39,6 +36,7 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
         return jLabel;
     }
 
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -50,7 +48,7 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
         // 버튼을 눌렀을 때
         switch (ActionCommand.valueOf(e.getActionCommand())) {
             case START:
-                gameFrame.change(Panel.GAME_MAP.name());
+                gameFrame.change(Panel.GAME_SELECT_PLAYER.name());
                 break;
             case RANK:
                 gameFrame.change(Panel.GAME_RANK.name());
@@ -60,7 +58,7 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
                 break;
             case EXIT:
                 // 게임 종료
-                gameFrame.dispose();
+                System.out.println("exit");
                 break;
 
             default:
