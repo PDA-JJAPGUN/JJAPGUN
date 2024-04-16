@@ -44,9 +44,9 @@ public class Enemy3 extends Enemy{
                         Thread.sleep(5);
 
                         movedown();
-                        y++;
+//                        y++;
 
-                        if (y < 400) {
+                        if (y < 600) {
                             moveleft();
                         }
 
@@ -86,12 +86,12 @@ public class Enemy3 extends Enemy{
 
                     try {
                         if (collision) {
-                            exploseEnemy(player, enemy3); // 충돌 폭발 메서드
+                            explodeEnemy(player, enemy3); // 충돌 폭발 메서드
                         }
                         Thread.sleep(10);
 
                         if (crushCheck) {
-                            exploseEnemy(enemy3);
+                            explodeEnemy(enemy3);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -105,7 +105,7 @@ public class Enemy3 extends Enemy{
     }
 
     public void bulletCreate() {
-        if (count % 100 == 0 && count <400) {
+        if (count % 100 == 0 &&  !crushCheck) {
 
             bullet = new Bullet(player, x + 35, y + 55, 270, 5, 20, 20);
 //            System.out.println("gg"+bullet.getY());

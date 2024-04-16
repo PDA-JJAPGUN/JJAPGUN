@@ -1,7 +1,6 @@
 package objects.Enemy;
 
 import objects.Bullet;
-import objects.Enemy.Enemy;
 import objects.player.Player;
 
 import java.awt.Graphics;
@@ -45,9 +44,9 @@ public class Enemy2 extends Enemy {
                         Thread.sleep(5);
 
                         movedown();
-                        y++; // down가속
+//                        y++; // down가속
 
-                        if (y < 400) {
+                        if (y < 600) {
                             moveright();
 
                         }
@@ -88,12 +87,12 @@ public class Enemy2 extends Enemy {
 
                     try {
                         if (collision) {
-                            exploseEnemy(player, enemy2); // 충돌 폭발 메서드
+                            explodeEnemy(player, enemy2); // 충돌 폭발 메서드
                         }
                         Thread.sleep(10);
 
                         if (crushCheck) {
-                            exploseEnemy(enemy2);
+                            explodeEnemy(enemy2);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -107,7 +106,7 @@ public class Enemy2 extends Enemy {
     }
 
     public void bulletCreate() {
-        if (count % 100 == 0 && count < 300) {
+        if (count % 100 == 0 && !crushCheck) {
             bullet = new Bullet(player, x + 35, y + 55, 270, 5, 20, 20);
             bullets.add(bullet);
             System.out.println(bullets.size());
