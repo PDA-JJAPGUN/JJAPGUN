@@ -11,10 +11,10 @@ import javax.swing.ImageIcon;
 
 public class Enemy2 extends Enemy {
 
-    private Enemy2 enemy2 = this;
+    private Enemy enemy2 = this;
     private static final String TAG = "Enemy4 : ";
 
-    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    ArrayList<Bullet> bullets = new ArrayList<>();
     private Bullet bullet;
 
     public Enemy2(Player player, int x, int y, int w, int h) {
@@ -28,7 +28,7 @@ public class Enemy2 extends Enemy {
         this.crushCheck = false;
         this.isThreadLife = true;
 
-//        this.player.contextAdd(enemy2);
+        this.player.addEnemyContext(enemy2);
 
         this.move();
         this.crush();
