@@ -24,17 +24,17 @@ public class GameEnd extends GameTitle {
 
         JLabel gameResult = createLabel((GameController.getInstance().getIsGameWin())? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
         gameResult.setFont(new Font(null, Font.BOLD, 40));
-        gameResult.setBounds(setX(300)-10,  setY(100) - 330, 300, 100);  // 위치와 크기 설정
+        gameResult.setBounds(180,  400, 300, 100);  // 위치와 크기 설정
         add(gameResult);
 
-        JLabel currScore = createLabel("SCORE : 11111", Color.WHITE, Color.BLACK);
-        currScore.setBounds(setX(300) - 80, setY(50) - 100, 300, 50);  // 위치와 크기 설정
+        JLabel currScore = createLabel("SCORE :", Color.WHITE, Color.RED);
+        currScore.setBounds(130, setY(50) - 100, 300, 50);  // 위치와 크기 설정
         currScore.setFont(new Font(null, Font.BOLD, 20));
         currScore.setHorizontalAlignment(JLabel.CENTER);
         add(currScore);
 
         JLabel bestScore = createLabel("BEST SCORE : 22222", Color.WHITE, Color.BLACK);
-        bestScore.setBounds(setX(300) - 80, setY(50) - 200, 300, 50);  // 위치와 크기 설정
+        bestScore.setBounds(130, setY(50) - 200, 300, 50);  // 위치와 크기 설정
         bestScore.setFont(new Font(null, Font.BOLD, 20));
         bestScore.setHorizontalAlignment(JLabel.CENTER);
         add(bestScore);

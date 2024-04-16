@@ -50,7 +50,6 @@ public class GameController {
     }
 
     public void gameOver(boolean isGameWin) {
-        gameFrame = new GameFrame();
         setGameWin(isGameWin);
         if (gameFrame != null) {
             gameFrame.change(Panel.GAME_END.name());
