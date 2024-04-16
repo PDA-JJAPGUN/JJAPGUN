@@ -1,5 +1,6 @@
 package service;
 
+import controller.GameController;
 import dao.impl.UserDAOImpl;
 import dto.SignupDto;
 import dto.LoginDto;
@@ -11,17 +12,19 @@ public class UserService {
         String id = signupDto.getId();
         String password = signupDto.getPassword();
         String nickname = signupDto.getNickname();
-        Integer bestScore = null;
+        Integer bestScore = 0;
 
         UserEntity userEntity = new UserEntity(id, password, nickname, bestScore);
         return userDao.signup(userEntity);
     }
 
-    public Boolean login(LoginDto loginDto) {
+    public Boolean login(LoginDto loginDto, GameController gameController) {
         String id = loginDto.getId();
         String password = loginDto.getPassword();
 
         UserEntity userEntity = new UserEntity(id, password);
-        return userDao.login(userEntity);
+        boolean isLogin = userDao.login(userEntity);
+        if (isLogin) gameController.gameStart(userDao.findUser(id));
+        return isLogin;
     }
 }
