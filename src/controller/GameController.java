@@ -1,6 +1,5 @@
 package controller;
 
-import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.UserEntity;
 import view.GameFrame;

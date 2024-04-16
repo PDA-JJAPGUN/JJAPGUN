@@ -330,7 +330,6 @@ public class Player extends JLabel {
 		}
 	}
 
-
 	private void gameOver() {
 		if (life <= 0) {
 			userService.saveBestScore(userSession.getLoggedInUserId(), score);
@@ -340,7 +339,6 @@ public class Player extends JLabel {
 			gameFrame.dispose();
 			new GameFrame();
 		}
-
 	}
 
 	public void addBossContext(Boss boss) {

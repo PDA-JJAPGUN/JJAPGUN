@@ -1,10 +1,14 @@
 package view;
 
+import controller.GameController;
+import controller.UserController;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class GameEnd extends GameTitle {
+
     public GameEnd(GameFrame gameFrame, boolean isGameWin) {
         super(gameFrame);
 

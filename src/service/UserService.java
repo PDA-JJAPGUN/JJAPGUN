@@ -29,9 +29,14 @@ public class UserService {
         return isLogin;
     }
 
+    public UserEntity getUser(String id) {
+        return userDao.getUser(id);
+    }
+
     public void saveBestScore(String id, int score) {
         UserEntity user = userDao.getUser(id);
-        user.setBestScore(score);
+        int currentScore = user.getBestScore();
+        user.setBestScore(Math.max(currentScore, score));
         userDao.saveUser(user);
     }
 }
