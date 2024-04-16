@@ -56,8 +56,7 @@ public class UserView extends JFrame implements ActionListener {
         if (e.getSource() == btn_signup) {
             String id = tf_id.getText();
             String password = tf_password.getText();
-            String nickname = tf_password.getText();
-
+            String nickname = tf_nickname.getText();
             SignupDto signupDto = new SignupDto(id, password, nickname);
 
             la_result.setText(
@@ -76,7 +75,7 @@ public class UserView extends JFrame implements ActionListener {
                 la_result.setText("로그인 실패");
             }
         }
-        if (e.getSource() == btn_logout) {
+        if (e.getSource() == btn_logout) { // TODO: 로그아웃 구현
             String id = tf_id.getText();
             String password = tf_password.getText();
 
@@ -84,9 +83,9 @@ public class UserView extends JFrame implements ActionListener {
             LoginDto loginDto = new LoginDto(id, password);
 
             if(userController.login(loginDto)) {
-                la_result.setText("로그인 성공");
+                la_result.setText("로그아웃 성공");
             } else {
-                la_result.setText("로그인 실패");
+                la_result.setText("로그아웃 실패");
             }
         }
     }

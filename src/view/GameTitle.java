@@ -65,4 +65,12 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
         }
 
     }
+
+    int setX(int width) {
+        return (SCREEN_WIDTH - width) / 2;
+    }
+
+    int setY(int height) {
+        return SCREEN_HEIGHT - height - 50;
+    }
 }

@@ -2,6 +2,8 @@ package dao.impl;
 
 import dao.UserDAO;
 import entity.UserEntity;
+import session.UserSession;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,9 +37,9 @@ public class UserDAOImpl implements UserDAO{
 
         // store에서 id로 가져온 user가 null이 아니고,
         // 전달받은 user의 password와 Map에 저장되어있는 password가 같을 경우
-        if (storeUser != null && userEntity.getPassword().equals(storeUser.getNickname())) {
+        if (storeUser != null && userEntity.getPassword().equals(storeUser.getPassword())) {
             // 사용자 인증 성공
-//            UserSession.getInstance().setLoggedInUserId(id); // 로그인된 사용자의 ID를 UserSession에 저장
+            UserSession.getInstance().setLoggedInUserId(id); // 로그인된 사용자의 ID를 UserSession에 저장
             // 사용자 인증 성공
             return true;
         } else {
@@ -45,4 +47,11 @@ public class UserDAOImpl implements UserDAO{
             return false;
         }
     }
+
+    @Override
+    public UserEntity findUser(String id) {
+        return store.get(id);
+    }
+
+
 }

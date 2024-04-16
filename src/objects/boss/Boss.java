@@ -1,4 +1,4 @@
-package objects;
+package objects.boss;
 
 import javax.swing.*;
 import java.awt.*;

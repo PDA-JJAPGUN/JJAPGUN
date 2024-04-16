@@ -1,12 +1,11 @@
 package objects;
 
-import controller.BulletController;
-
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
 public class Bullet implements Runnable{
+
 //    private view.GameFrame gameFrame;
     
 //    private PlayerPlane player;
@@ -24,9 +23,9 @@ public class Bullet implements Runnable{
     private double speed = 2; // 총알속도
     private int width;
     private int height;
+
     private boolean isThreadLife;
-    public Bullet( int x, int y, double angel, double speed, int width,
-                  int height) {
+    public Bullet( int x, int y, double angel, double speed, int width, int height) {
 
 //        this.player = player;
         this.x = x;
@@ -39,9 +38,9 @@ public class Bullet implements Runnable{
 
         this.collision = false;
 
-//        Thread bulletthread = new Thread(this); // 총알 충돌 thread 생성, 실행
-//        bulletthread.setName("EnemyBullet");
-//        bulletthread.start();
+       Thread bulletthread = new Thread(this); // 총알 충돌 thread 생성, 실행
+       bulletthread.setName("EnemyBullet");
+       bulletthread.start();
     }
 
 //    public view.GameFrame getGameFrame() {
@@ -55,7 +54,7 @@ public class Bullet implements Runnable{
 //    public PlayerPlane getPlayer() {
 //        return player;
 //    }
-//
+
 //    public void setPlayer(PlayerPlane player) {
 //        this.player = player;
 //    }
@@ -64,6 +63,7 @@ public class Bullet implements Runnable{
     public void setThreadLife(boolean threadLife) {
         isThreadLife = threadLife;
     }
+
 
     public boolean isCollision() {
         return collision;
@@ -125,6 +125,7 @@ public class Bullet implements Runnable{
         x -= Math.cos(Math.toRadians(angel)) * speed;
         y -= Math.sin(Math.toRadians(angel)) * speed;
         Thread.sleep(10);
+
     }
 
     @Override
@@ -140,6 +141,7 @@ public class Bullet implements Runnable{
             if (x > 1000 || x < -500 || y < -500 || y > 1000) {
                  System.out.println("bullet thread terminate");
                 isThreadLife = false; // Thread 종료구문
+
             }
 
 //            if (!player.getInvincible()) { // 무적상태가 아니면
@@ -176,8 +178,10 @@ public class Bullet implements Runnable{
 //        try {
 //            ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
 //            player.setIcon(explosionIcon);
+
 //
 //            y = 1000; // 가비지 컬렉션으로만 가능, 강제로 제거하려면 finallize 함수
+
 //
 //            islife = false;// 이게아닌가벼
 //            player.setInvincible(true); // 무적상태
@@ -203,3 +207,4 @@ public class Bullet implements Runnable{
 //    }
 
 }
+
