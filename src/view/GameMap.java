@@ -29,10 +29,8 @@ public class GameMap extends JPanel {
     private Image bossStageImg = bossStageIcon.getImage();
     private ImageIcon stageIcon = new ImageIcon("images/Stage.jpg");
     private Image stageImg = stageIcon.getImage();
-    int stageY1 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
-    int stageY2 = -stageImg.getHeight(null) + bossStageImg.getHeight(null);
-    int bossStageBY1 = -bossStageImg.getHeight(null);
-    int bossStageBY2 = -bossStageImg.getHeight(null) * 2;
+    int stageY1 = 0;
+    int stageY2 = -stageImg.getHeight(null);
 
     int appear = 1;
     int score = 0;
@@ -70,32 +68,14 @@ public class GameMap extends JPanel {
                 setComponentZOrder(la_score, 0);
 
                 while (gameFrame.isgame) {
-                    if (boss == null) {
-                        stageY1++;
-                        stageY2++;
-                        if (stageY1 > stageImg.getHeight(null)) {
-                            stageY1 = 0;
-                        }
-                        if (stageY2 > 0) {
-                            stageY2 = -stageImg.getHeight(null);
-                        }
+                    stageY1++;
+                    stageY2++;
+                    if (stageY1 > stageImg.getHeight(null)) {
+                        stageY1 = 0;
                     }
-                    if (boss != null) {
-                        if (bossStageBY1 < bossStageImg.getHeight(null) &&
-                                bossStageBY2 < bossStageImg.getHeight(null)) {
-                            stageY1++;
-                            stageY2++;
-                        }
-                        bossStageBY1++;
-                        bossStageBY2++;
-                        if (bossStageBY1 > bossStageImg.getHeight(null)) {
-                            bossStageBY1 = 0;
-                        }
-                        if (bossStageBY2 > 0) {
-                            bossStageBY2 = -bossStageImg.getHeight(null);
-                        }
+                    if (stageY2 > 0) {
+                        stageY2 = -stageImg.getHeight(null);
                     }
-
                     try {
                         appear++;
                         lifeCounting();
@@ -116,8 +96,6 @@ public class GameMap extends JPanel {
         changeBgImg();
         g.drawImage(stageImg, 0, stageY1, null);
         g.drawImage(stageImg, 0, stageY2, null);
-        g.drawImage(bossStageImg, 0, bossStageBY1, null);
-        g.drawImage(bossStageImg, 0, bossStageBY2, null);
 
         for (int i = 0; i < enemyUnits.size(); i++) { // null이 아니면 그려라
             if (enemyUnits.get(i) != null) {
@@ -166,11 +144,18 @@ public class GameMap extends JPanel {
     }
 
     public void changeBgImg(){
-        if(appear == 1000){
-
+        if(appear == 5000){
             stageIcon = new ImageIcon("images/Stage2.png");
             stageImg = stageIcon.getImage();
+            stageY1 = 0;
+            stageY2 = -stageImg.getHeight(null);
+        }else if(appear == 10000){
+            stageIcon = new ImageIcon("images/vsBossStage.jpg");
+            stageImg = stageIcon.getImage();
+            stageY1 = 0;
+            stageY2 = -stageImg.getHeight(null);
         }
+
     }
 
     public void batchEnemy() {
