@@ -53,5 +53,10 @@ public class UserDAOImpl implements UserDAO{
         return store.get(id);
     }
 
+    @Override
+    public void saveUser(UserEntity user) {
+        store.put(user.getId(), user);
+    }
+
 
 }

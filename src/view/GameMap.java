@@ -13,7 +13,7 @@ public class GameMap extends JPanel {
     private GameMap gameMap = this;
     private GameFrame gameFrame;
 
-    private EnemyEntity enemyUnit;
+    private Enemy enemyUnit;
     private Boss boss;
 
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
@@ -32,7 +32,6 @@ public class GameMap extends JPanel {
 
 
     int appear = 1;
-    int score = 0;
     JLabel la_score;
     Font font = new Font(null,1,40);
 
@@ -57,7 +56,7 @@ public class GameMap extends JPanel {
                 setComponentZOrder(laLifecount2,0);
                 setComponentZOrder(laLifecount3,0);
 
-                la_score = new JLabel(score+"");
+                la_score = new JLabel("0");
                 la_score.setForeground(Color.WHITE);
                 la_score.setFont(font);
                 la_score.setBounds(425, 0, 150, 50);
@@ -78,7 +77,8 @@ public class GameMap extends JPanel {
                     try {
 
                         appear++;
-                        lifeCounting();
+                        countLife();
+                        updateScore();
                         batchEnemy();
                         crushBorder();
 
@@ -109,7 +109,7 @@ public class GameMap extends JPanel {
             }
         }
         if (boss != null){
-            boss.bossDraw(g);
+            boss.planeDraw(g);
         }
 
         repaint();
@@ -123,7 +123,7 @@ public class GameMap extends JPanel {
 
     }
 
-    public void lifeCounting() {
+    public void countLife() {
         if (gameFrame.player.getLife() == 3) {
             laLifecount.setVisible(true);
             laLifecount2.setVisible(true);
@@ -145,6 +145,11 @@ public class GameMap extends JPanel {
             laLifecount3.setVisible(false);
             repaint();
         }
+    }
+
+    public void updateScore() {
+        la_score.setText(String.valueOf(gameFrame.player.score));
+        repaint();
     }
 
 
@@ -185,7 +190,7 @@ public class GameMap extends JPanel {
             }
         }
         if (appear == 10000) {
-            boss = new Boss(0, -300);
+            boss = new Boss(gameFrame.player,0, -300);
         }
     }
 

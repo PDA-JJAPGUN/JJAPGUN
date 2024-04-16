@@ -1,7 +1,14 @@
 package objects.player;
 
-import objects.Enemy.EnemyEntity;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import objects.Enemy.Enemy;
+import objects.Enemy.Enemy1;
+import objects.Enemy.Enemy2;
+import objects.Enemy.Enemy3;
 import objects.boss.Boss;
+import service.UserService;
+import session.UserSession;
 import view.GameFrame;
 
 import javax.swing.*;
@@ -10,12 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends JLabel {
-	public final static String TAG = "Player: ";
+	public UserService userService;
+	public UserSession userSession;
 
 	public Player player = this;
 
 	private GameFrame gameFrame;
-	private List<EnemyEntity> enemyUnits = new ArrayList<>();
+	private List<Enemy> enemies = new ArrayList<>();
 	private Boss boss;
 
 	private ImageIcon playerIcon; // 기본 아이콘
@@ -40,12 +48,17 @@ public class Player extends JLabel {
 	public boolean isAttack = false;
 	public boolean isWeaponLevelUp = false;
 
+	public int score = 0;
+
 	private PlayerAttack playerAttack;
 	public List<PlayerAttack> playerBullets = new ArrayList<>();
 
 	ArrayList<Integer> check = new ArrayList<>(); // 필요없는 총알 인덱스 체크용
 
 	public Player(GameFrame gameFrame, String PLANE) {
+
+		this.userService = new UserService();
+		this.userSession = UserSession.getInstance();
 
 		this.gameFrame = gameFrame;
 		playerIcon = new ImageIcon("img/Player" + PLANE + ".png");
@@ -189,45 +202,45 @@ public class Player extends JLabel {
 		if (!invincible && isAttack && bulletSpeed % 30 == 0) { // 총알의 발사 속도를 조절
 			if (weaponLevel == 0) { // 총알 한줄만 발사
 				// 총알이 생성되는 위치, 각도, 발사속도 조절
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 20, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 20, y - 40, 90, 2);
 				playerBullets.add(playerAttack); // arrayList에 저장한다
 			}
 			if (weaponLevel == 1) { // 총알 2줄 발사
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 30, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 2) { // 총알 3줄 발사
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 0, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 0, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 20, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 20, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 40, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 40, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 3) { // 총알 4줄 발사
-				playerAttack = new PlayerAttack(boss, enemyUnits, x - 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 30, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 50, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 50, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 4) { // 양 옆 대각선으로 나가는 총알 2줄 추가
-				playerAttack = new PlayerAttack(boss, enemyUnits, x - 15, y - 40, 80, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 15, y - 40, 80, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x - 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 30, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 50, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 50, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 55, y - 40, 100, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 55, y - 40, 100, 2);
 				playerBullets.add(playerAttack);
 			}
 		}
@@ -288,18 +301,20 @@ public class Player extends JLabel {
 		}
 	}
 
-	public void addEnemyContext(EnemyEntity enemyUnit) { // 동적으로 생성된 적의 컨텍스트를 받아온다.
+	public void addEnemyContext(Enemy enemyUnit) { // 동적으로 생성된 적의 컨텍스트를 받아온다.
 
 		if (enemyUnit != null)
-			this.enemyUnits.add(enemyUnit);
+			this.enemies.add(enemyUnit);
 	}
 
 	private void resolveCrash() {
 		List<Integer> toRemove = new ArrayList<>();
 		for (int i = 0; i < playerBullets.size(); i++) {
 			PlayerAttack bullet = playerBullets.get(i);
-			if (bullet.processCrash()) {
+			Enemy crashedEnemy;
+			if ((crashedEnemy = bullet.processCrash()) != null) {
 				toRemove.add(i);
+				addScore(crashedEnemy);
 			}
 		}
 
@@ -309,9 +324,21 @@ public class Player extends JLabel {
 		}
 	}
 
+	private void addScore(Enemy enemy) {
+		if (enemy instanceof Enemy1) {
+			score += 100;
+		} else if (enemy instanceof Enemy2) {
+			score += 200;
+		} else if (enemy instanceof Enemy3) {
+			score += 300;
+		}
+	}
+
 
 	private void gameOver() {
 		if (life <= 0) {
+			userService.saveBestScore(userSession.getLoggedInUserId(), score);
+
 			isAlive = false; //dispose 해도 안의 쓰레드는 살아있다...  이 명령 추가.. 그냥 완전 다 삭제해주는 함수는 없나...
 			gameFrame.isgame = false;
 			gameFrame.dispose();

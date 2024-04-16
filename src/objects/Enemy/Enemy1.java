@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Enemy1 extends Enemy {
-    private Enemy1 enemy1 = this;
+    private Enemy enemy1 = this;
     public Enemy1(Player player, int x, int y, int w, int h) {
 
         this.player = player;
@@ -19,15 +19,13 @@ public class Enemy1 extends Enemy {
         this.crushCheck = false;
         this.isThreadLife = true;
 
-//        this.player.contextAdd(enemy1); // 동적으로 생성때마다 컨텍스트 플레이어에게 넘기기
+        this.player.addEnemyContext(enemy1); // 동적으로 생성때마다 컨텍스트 플레이어에게 넘기기
 
         this.move();
         this.crush(); // 충돌탐지용
 
 
     }
-
-
 
     public void move() {
         Thread t1 = new Thread(new Runnable() {

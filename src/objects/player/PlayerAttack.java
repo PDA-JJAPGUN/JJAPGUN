@@ -1,6 +1,6 @@
 package objects.player;
 
-import objects.Enemy.EnemyEntity;
+import objects.Enemy.Enemy;
 import objects.boss.Boss;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerAttack implements Runnable {
 	private PlayerAttack playerAttack = this;
-	private List<EnemyEntity> enemyUnits;
+	private List<Enemy> enemies;
 	private Boss boss;
 
 	Image playerBulletImg1 = new ImageIcon("img/playerBullet1.png").getImage();
@@ -30,13 +30,13 @@ public class PlayerAttack implements Runnable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PlayerAttack(Boss boss, List<EnemyEntity> enemyUnits, int x, int y, double bulletAngle, double bulletSpeed) {
+	public PlayerAttack(Boss boss, List<Enemy> enemies, int x, int y, double bulletAngle, double bulletSpeed) {
 
 		if (boss != null) {
 			this.boss = boss;
 		}
 
-		this.enemyUnits = enemyUnits;
+		this.enemies = enemies;
 		this.x = x;
 		this.y = y;
 		this.angle = bulletAngle;
@@ -152,17 +152,17 @@ public class PlayerAttack implements Runnable {
 
 	}
 
-	public boolean processCrash() {
+	public Enemy processCrash() {
 		List<Integer> toRemove = new ArrayList<>();
-		for (int i = 0; i < enemyUnits.size(); i++) {
-			EnemyEntity unit = enemyUnits.get(i);
+		for (int i = 0; i < enemies.size(); i++) {
+			Enemy unit = enemies.get(i);
 
 			if (crashed(unit)) {
 
 				System.out.println("하기 전: " + unit.crushCheck);
 				unit.setLife(unit.getLife() - 1);
 
-				if (unit.life >= 0) {
+				if (unit.getLife() <= 0) {
 					System.out.println("적 hp 0 됨");
 					toRemove.add(i);
 					unit.crushCheck = true;
@@ -171,14 +171,15 @@ public class PlayerAttack implements Runnable {
 			}
 		}
 
+		Enemy removedEnemy = null;
 		for (int i : toRemove) {
-			enemyUnits.remove(i);
+			removedEnemy = enemies.remove(i);
 		}
-		return !toRemove.isEmpty();
+		return removedEnemy;
 	}
 
 	// 플레이어 총알이 적의 비행기에 닿았는지 탐지하는 연산
-	private boolean crashed(EnemyEntity unit) {
+	private boolean crashed(Enemy unit) {
 		// x,y : 위치값 , w,h : 이미지의 높이와 길이.
 		if (Math.abs((this.getX() + this.getWidth() / 2) - (unit.x + unit.width / 2)) < (unit.width / 2 + this.getWidth() / 2)
 				&& Math.abs((this.getY() + this.getHeight() / 2) - (unit.y + unit.height / 2)) < (unit.height / 2 + this.getHeight() / 2))
@@ -200,7 +201,7 @@ public class PlayerAttack implements Runnable {
 
 	public void explosePlayer(Boss boss) { // 충돌후 이미지 변경 및 목숨카운트
 		try {
-			ImageIcon explosionIcon = new ImageIcon("img/explosion.gif");
+			ImageIcon explosionIcon = new ImageIcon("images/explosion.gif");
 			boss.imgBoss = explosionIcon.getImage();
 			Thread.sleep(3000);
 

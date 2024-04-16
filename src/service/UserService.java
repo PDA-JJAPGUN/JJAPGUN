@@ -27,4 +27,10 @@ public class UserService {
         if (isLogin) gameController.setUser(userDao.findUser(id));
         return isLogin;
     }
+
+    public void saveBestScore(String id, int score) {
+        UserEntity user = userDao.findUser(id);
+        user.setBestScore(score);
+        userDao.saveUser(user);
+    }
 }

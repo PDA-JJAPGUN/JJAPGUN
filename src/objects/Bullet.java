@@ -12,10 +12,10 @@ public class Bullet implements Runnable{
     private boolean collision;
 
     public Image bulletImg1 = new ImageIcon("images/bullet1.png").getImage();
-    Image bulletImg2 = new ImageIcon("images/bullet2.png").getImage();
-    Image bulletImg3 = new ImageIcon("images/bullet3.png").getImage();
-    Image bulletImg4 = new ImageIcon("images/bullet4.png").getImage();
-    Image bulletImg5 = new ImageIcon("images/missle.png").getImage();
+    public Image bulletImg2 = new ImageIcon("images/bullet2.png").getImage();
+    public Image bulletImg3 = new ImageIcon("images/bullet3.png").getImage();
+    public Image bulletImg4 = new ImageIcon("images/bullet4.png").getImage();
+    public Image bulletImg5 = new ImageIcon("images/missle.png").getImage();
 
     private int x;
     private int y;
@@ -25,6 +25,9 @@ public class Bullet implements Runnable{
     private int height;
 
     private boolean isThreadLife;
+
+    public int b1Width = bulletImg1.getWidth(null);
+    public int b1Height = bulletImg1.getHeight(null);
     public Bullet( int x, int y, double angel, double speed, int width, int height) {
 
 //        this.player = player;
