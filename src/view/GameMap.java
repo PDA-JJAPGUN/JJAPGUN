@@ -13,7 +13,7 @@ public class GameMap extends JPanel {
     private GameMap gameMap = this;
     private GameFrame gameFrame;
 
-    private EnemyEntity enemyUnit;
+    private Enemy enemyUnit;
     private Boss boss;
 
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨

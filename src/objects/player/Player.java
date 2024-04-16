@@ -1,6 +1,6 @@
 package objects.player;
 
-import objects.Enemy.EnemyEntity;
+import objects.Enemy.Enemy;
 import objects.boss.Boss;
 import view.GameFrame;
 
@@ -15,7 +15,7 @@ public class Player extends JLabel {
 	public Player player = this;
 
 	private GameFrame gameFrame;
-	private List<EnemyEntity> enemyUnits = new ArrayList<>();
+	private List<Enemy> enemies = new ArrayList<>();
 	private Boss boss;
 
 	private ImageIcon playerIcon; // 기본 아이콘
@@ -189,45 +189,45 @@ public class Player extends JLabel {
 		if (!invincible && isAttack && bulletSpeed % 30 == 0) { // 총알의 발사 속도를 조절
 			if (weaponLevel == 0) { // 총알 한줄만 발사
 				// 총알이 생성되는 위치, 각도, 발사속도 조절
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 20, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 20, y - 40, 90, 2);
 				playerBullets.add(playerAttack); // arrayList에 저장한다
 			}
 			if (weaponLevel == 1) { // 총알 2줄 발사
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 30, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 2) { // 총알 3줄 발사
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 0, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 0, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 20, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 20, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 40, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 40, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 3) { // 총알 4줄 발사
-				playerAttack = new PlayerAttack(boss, enemyUnits, x - 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 30, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 50, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 50, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 4) { // 양 옆 대각선으로 나가는 총알 2줄 추가
-				playerAttack = new PlayerAttack(boss, enemyUnits, x - 15, y - 40, 80, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 15, y - 40, 80, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x - 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 10, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 30, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 50, y - 40, 90, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 50, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemyUnits, x + 55, y - 40, 100, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 55, y - 40, 100, 2);
 				playerBullets.add(playerAttack);
 			}
 		}
@@ -288,10 +288,10 @@ public class Player extends JLabel {
 		}
 	}
 
-	public void addEnemyContext(EnemyEntity enemyUnit) { // 동적으로 생성된 적의 컨텍스트를 받아온다.
+	public void addEnemyContext(Enemy enemyUnit) { // 동적으로 생성된 적의 컨텍스트를 받아온다.
 
 		if (enemyUnit != null)
-			this.enemyUnits.add(enemyUnit);
+			this.enemies.add(enemyUnit);
 	}
 
 	private void resolveCrash() {

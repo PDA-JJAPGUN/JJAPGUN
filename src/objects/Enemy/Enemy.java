@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Enemy extends JPanel implements Plane {
-    protected Player player;
-    protected int x, y; // 현재 위치
-    protected int width, height; // 사진(적의 가로 세로 길이)
-    protected int life; // 목숨 수
-    protected int count;
-    protected Image image;
-    protected boolean collision = false;
-    protected boolean crushCheck;
+    public Player player;
+    public int x, y; // 현재 위치
+    public int width, height; // 사진(적의 가로 세로 길이)
+    public int life; // 목숨 수
+    public int count;
+    public Image image;
+    public boolean collision = false;
+    public boolean crushCheck;
     protected int bulletSpeed;
 
     protected boolean isThreadLife; //스레드 생명 - islife에서 수정(모호 이슈)
