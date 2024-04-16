@@ -1,14 +1,12 @@
 package view;
 
-import javax.swing.*;
-import objects.boss.Boss;
-
-import objects.Enemy.Enemy;
 import objects.Enemy.Enemy1;
 import objects.Enemy.Enemy2;
 import objects.Enemy.Enemy3;
+import objects.Enemy.EnemyEntity;
+import objects.boss.Boss;
 
-
+import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
 
@@ -17,36 +15,40 @@ public class GameMap extends JPanel {
 
     private GameMap gameMap = this;
     private GameFrame gameFrame;
+
+    private EnemyEntity enemyUnit;
     private Boss boss;
+
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
     private ImageIcon lifeCounticon;
 
+    private ImageIcon stageIcon = new ImageIcon("images/Stage.png");
+    private Image stageImg = stageIcon.getImage();
 
-    Vector<Enemy> enemyUnits = new Vector<>();
-
-    Enemy enemy;
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
     private Image bossStageImg = bossStageIcon.getImage();
+
     private ImageIcon stageIcon = new ImageIcon("images/Stage.jpg");
     private Image stageImg = stageIcon.getImage();
     int stageY1 = 0;
     int stageY2 = -stageImg.getHeight(null);
 
+
     int appear = 1;
     int score = 0;
     JLabel la_score;
-    Font font = new Font(null, 1, 40);
+    Font font = new Font(null,1,40);
 
-    public GameMap(GameFrame gameFrame) {
+    Vector<EnemyEntity> enemyUnits = new Vector<>();
+
+    public GameMap(GameFrame gameFrame){
 
         this.gameFrame = gameFrame;
-
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 gameFrame.isgame = true;
-                setLayout(null);
 
                 lifeLaInit();
                 add(laLifecount);
@@ -67,6 +69,7 @@ public class GameMap extends JPanel {
                 add(la_score);
                 setComponentZOrder(la_score, 0);
 
+
                 while (gameFrame.isgame) {
                     stageY1++;
                     stageY2++;
@@ -77,71 +80,72 @@ public class GameMap extends JPanel {
                         stageY2 = -stageImg.getHeight(null);
                     }
                     try {
+
                         appear++;
                         lifeCounting();
                         batchEnemy();
+                        crushBorder();
+
                         repaint();
                         Thread.sleep(3);
-                    } catch (Exception e) {
+                    }catch(Exception e){
                         //Handle exception
                     }
                 }
             }
         }).start();
     }
-
+  
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g){
         super.paintComponent(g);
         changeBgImg();
         g.drawImage(stageImg, 0, stageY1, null);
         g.drawImage(stageImg, 0, stageY2, null);
 
-        for (int i = 0; i < enemyUnits.size(); i++) { // null이 아니면 그려라
-            if (enemyUnits.get(i) != null) {
-                enemyUnits.get(i).planeDraw(g);
-            }
+        if (gameFrame.player != null) {
+            gameFrame.player.playerUpdate(g);
         }
 
-        if (boss != null) {
+        if (boss != null){
             boss.bossDraw(g);
         }
 
         repaint();
     }
 
-
-    private void lifeLaInit() {
+    private void lifeLaInit() { // 당장 안 써요. 괜히 만들어달라 했나..
         lifeCounticon = new ImageIcon("images/LifeCount.png");
         laLifecount = new JLabel(lifeCounticon);
         laLifecount2 = new JLabel(lifeCounticon);
         laLifecount3 = new JLabel(lifeCounticon);
-    }
 
+    }
 
     public void lifeCounting() {
-//        if (gameFrame.player.getLife() == 3) {
-//            laLifecount.setVisible(true);
-//            laLifecount2.setVisible(true);
-//            laLifecount3.setVisible(true);
-//            repaint();
-//        } else if (gameFrame.player.getLife() == 2) {
-//            laLifecount.setVisible(true);
-//            laLifecount2.setVisible(true);
-//            laLifecount3.setVisible(false);
-//            repaint();
-//        } else if (gameFrame.player.getLife() == 1) {
-//            laLifecount.setVisible(true);
-//            laLifecount2.setVisible(false);
-//            laLifecount3.setVisible(false);
-//            repaint();
-//        } else {
-//            laLifecount.setVisible(false);
-//            laLifecount2.setVisible(false);
-//            laLifecount3.setVisible(false);
-//            repaint();
-//        }
+        if (gameFrame.player.getLife() == 3) {
+            laLifecount.setVisible(true);
+            laLifecount2.setVisible(true);
+            laLifecount3.setVisible(true);
+            repaint();
+        } else if (gameFrame.player.getLife() == 2) {
+            laLifecount.setVisible(true);
+            laLifecount2.setVisible(true);
+            laLifecount3.setVisible(false);
+            repaint();
+        } else if (gameFrame.player.getLife() == 1) {
+            laLifecount.setVisible(true);
+            laLifecount2.setVisible(false);
+            laLifecount3.setVisible(false);
+            repaint();
+        } else {
+            laLifecount.setVisible(false);
+            laLifecount2.setVisible(false);
+            laLifecount3.setVisible(false);
+            repaint();
+        }
     }
+
 
     public void changeBgImg(){
         if(appear == 5000){
@@ -178,12 +182,22 @@ public class GameMap extends JPanel {
                 enemyUnits.add(new Enemy1( 350, -150, 50, 50));
                 enemyUnits.add(new Enemy1(300, -200, 50, 50));
             }
-        }
 
-        if (appear == 10000) {
-            boss = new Boss(0, -300);
+    public void crushBorder() { // 벽에 충돌하는 조건함수 >> Map 스레드 안에 적용
+        if (gameFrame.player.getX() <= 0) {
+            gameFrame.player.setX(0);
+            repaint();
+        } else if (gameFrame.player.getX() >= 550) {
+            gameFrame.player.setX(550);
+            repaint();
         }
-
+        if (gameFrame.player.getY() <= 0) {
+            gameFrame.player.setY(0);
+            repaint();
+        } else if (gameFrame.player.getY() >= 720) {
+            gameFrame.player.setY(720);
+            repaint();
+        }
     }
-}
 
+}
