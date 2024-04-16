@@ -25,6 +25,8 @@ public class GameMap extends JPanel {
     private ImageIcon bossStageIcon = new ImageIcon("images/vsBossStage.png");
     private Image bossStageImg = bossStageIcon.getImage();
 
+    private ImageIcon stageIcon = new ImageIcon("images/Stage.jpg");
+    private Image stageImg = stageIcon.getImage();
     int stageY1 = 0;
     int stageY2 = -stageImg.getHeight(null);
 
@@ -186,6 +188,7 @@ public class GameMap extends JPanel {
             boss = new Boss(0, -300);
         }
     }
+
 
     public void crushBorder() { // 벽에 충돌하는 조건함수 >> Map 스레드 안에 적용
         if (gameFrame.player.getX() <= 0) {
