@@ -13,7 +13,7 @@ public class GameMap extends JPanel {
     private GameMap gameMap = this;
     private GameFrame gameFrame;
 
-    private EnemyEntity enemyUnit;
+    private Enemy enemyUnit;
     private Boss boss;
 
     private JLabel laLifecount, laLifecount2, laLifecount3; // lifecount 라벨
@@ -109,7 +109,7 @@ public class GameMap extends JPanel {
             }
         }
         if (boss != null){
-            boss.bossDraw(g);
+            boss.planeDraw(g);
         }
 
         repaint();
@@ -185,7 +185,7 @@ public class GameMap extends JPanel {
             }
         }
         if (appear == 10000) {
-            boss = new Boss(0, -300);
+            boss = new Boss(gameFrame.player,0, -300);
         }
     }
 
