@@ -27,7 +27,7 @@ public class GameEnd extends GameTitle {
         gameResult.setBounds(180,  400, 300, 100);  // 위치와 크기 설정
         add(gameResult);
 
-        JLabel currScore = createLabel("SCORE : 11111", Color.WHITE, Color.RED);
+        JLabel currScore = createLabel("SCORE :", Color.WHITE, Color.RED);
         currScore.setBounds(130, setY(50) - 100, 300, 50);  // 위치와 크기 설정
         currScore.setFont(new Font(null, Font.BOLD, 20));
         currScore.setHorizontalAlignment(JLabel.CENTER);
