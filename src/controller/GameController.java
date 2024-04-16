@@ -1,11 +1,17 @@
 package controller;
 
+import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.UserEntity;
 import view.GameFrame;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class GameController {
     private static final GameController instance = new GameController();
+
     // private 생성자를 통해 외부에서 인스턴스 생성을 방지
     private GameController() {}
 
@@ -25,5 +31,13 @@ public class GameController {
 
     public UserEntity getUser() {
         return user;
+    }
+
+    public List<UserEntity> getRanks() {
+        List<UserEntity> userEntities = UserDAOImpl.getInstance().getUsers();
+        return userEntities.stream()
+                .filter(user -> user.getBestScore() != null)
+                .sorted(Comparator.comparing(UserEntity::getBestScore).reversed())
+                .collect(Collectors.toList());
     }
 }

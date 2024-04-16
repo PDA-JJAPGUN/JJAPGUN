@@ -53,13 +53,16 @@ public class GameTitle extends JPanel implements ScreenSize, ActionListener {
                 gameFrame.change(Panel.GAME_MAP.name());
                 break;
             case RANK:
-                //TODO: 랭크 패널 변경
-                System.out.println("rank");
+                gameFrame.change(Panel.GAME_RANK.name());
+                break;
+            case X: // 랭킹 화면에서 닫기 버튼 눌렀을 때
+                gameFrame.change(Panel.GAME_END.name());
                 break;
             case EXIT:
                 // 게임 종료
                 gameFrame.dispose();
                 break;
+
             default:
                 break;
         }

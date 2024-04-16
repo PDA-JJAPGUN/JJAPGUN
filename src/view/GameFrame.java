@@ -8,6 +8,7 @@ public class GameFrame extends JFrame implements ScreenSize {
     public GameMap gameMap;
     public GameStart gameStart;
     public GameEnd gameEnd;
+    public GameRank gameRank;
     public boolean isgame;
 
     public GameFrame() {
@@ -44,6 +45,9 @@ public class GameFrame extends JFrame implements ScreenSize {
                 gameEnd = new GameEnd(gameFrame, true);
                 getContentPane().add(gameEnd);
                 break;
+            case GAME_RANK:
+                gameRank = new GameRank(gameFrame);
+                getContentPane().add(gameRank);
         }
 
         revalidate();

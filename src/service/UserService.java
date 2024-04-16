@@ -12,7 +12,7 @@ public class UserService {
         String id = signupDto.getId();
         String password = signupDto.getPassword();
         String nickname = signupDto.getNickname();
-        Integer bestScore = 0;
+        Integer bestScore = null;
 
         UserEntity userEntity = new UserEntity(id, password, nickname, bestScore);
         return userDao.signup(userEntity);
@@ -24,7 +24,7 @@ public class UserService {
 
         UserEntity userEntity = new UserEntity(id, password);
         boolean isLogin = userDao.login(userEntity);
-        if (isLogin) gameController.gameStart(userDao.findUser(id));
+        if (isLogin) gameController.gameStart(userDao.getUser(id));
         return isLogin;
     }
 }
