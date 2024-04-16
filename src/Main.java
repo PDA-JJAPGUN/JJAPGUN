@@ -5,7 +5,11 @@ import view.GameFrame;
 
 
 public class Main {
+    private final static UserService userService = new UserService();
     public static void main(String[] args) {
-        new UserController(new UserService(), GameController.getInstance());
+        startGame();
+    }
+    public static void startGame(){
+        new UserController(userService, GameController.getInstance());
     }
 }

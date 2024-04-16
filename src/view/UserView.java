@@ -20,7 +20,7 @@ public class UserView extends JFrame implements ActionListener {
     JButton btn_login = new JButton("로그인");
     JButton btn_start = new JButton("게임시작");
 
-
+    JLabel la_intro = new JLabel(".");
     JLabel la_id = new JLabel("아이디");
     JLabel la_pw = new JLabel("비밀번호");
     JLabel la_nickName = new JLabel("닉네임");
@@ -37,6 +37,7 @@ public class UserView extends JFrame implements ActionListener {
         setSize(500, 500); // 창 크기
         setLayout(null); // 레이아웃 매니저 초기화
 
+        la_intro.setBounds(150,10,200,40);
         la_id.setBounds(50, 50, 200, 40);
         tf_id.setBounds(150, 50, 150, 40);
 
@@ -53,6 +54,7 @@ public class UserView extends JFrame implements ActionListener {
 
         la_result.setBounds(50, 300, 200, 40);
 
+
         add(tf_id);
         add(tf_password);
         add(tf_nickname);
@@ -64,6 +66,7 @@ public class UserView extends JFrame implements ActionListener {
         add(la_pw);
         add(la_nickName);
 
+        add(la_intro);
         // 창을 끄면, 프로그램 종료
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -76,7 +79,8 @@ public class UserView extends JFrame implements ActionListener {
 
         if (e.getSource() == btn_start && isLogin){
             System.out.println("hihi");
-            this.dispose();
+//            this.dispose();
+            this.setVisible(false);
             gameController.gameStart();
         }else
             la_result.setText("유저정보 확인 실패");
@@ -103,6 +107,7 @@ public class UserView extends JFrame implements ActionListener {
 
             if(userController.login(loginDto)) {
                 la_result.setText("로그인 성공");
+                la_intro.setText(id+"님 안녕하세요");
                 this.isLogin = true;
             } else {
                 la_result.setText("로그인 실패");

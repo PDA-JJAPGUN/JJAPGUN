@@ -2,6 +2,7 @@ package controller;
 
 import dao.impl.UserDAOImpl;
 import entity.UserEntity;
+import service.UserService;
 import view.GameFrame;
 
 public class GameController {
@@ -17,7 +18,7 @@ public class GameController {
     public void setUser(UserEntity user) {
         this.user = user;
     }
-
+    
     UserEntity user;
     GameFrame gameFrame;
     public void gameStart() {

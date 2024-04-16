@@ -1,5 +1,6 @@
 package objects.player;
 
+import com.sun.tools.javac.Main;
 import objects.Enemy.Enemy;
 import objects.boss.Boss;
 
@@ -206,7 +207,8 @@ public class PlayerAttack implements Runnable {
 			Thread.sleep(3000);
 
 			System.out.println("보스 처치!!");
-			System.exit(1); // 프로그램 종료
+
+//			System.exit(1); // 프로그램 종료
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
