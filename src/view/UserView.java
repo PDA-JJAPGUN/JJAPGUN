@@ -25,14 +25,15 @@ public class UserView extends JFrame implements ActionListener {
     JButton btn_logout = new JButton("로그아웃");
 
     JButton btn_start = new JButton("게임시작");
-
-
+    ImageIcon bgIcon = new ImageIcon("Images/Login.png");
+    JLabel la_bg = new JLabel();
     JLabel la_id = new JLabel("아이디");
     JLabel la_pw = new JLabel("비밀번호");
     JLabel la_nickName = new JLabel("닉네임");
     JLabel la_result = new JLabel("");
     UserController userController;
     GameController gameController = new GameController();
+
     public UserView(UserController userController) {
         this.userController = userController;
 
@@ -44,11 +45,17 @@ public class UserView extends JFrame implements ActionListener {
         setSize(500, 500); // 창 크기
         setLayout(null); // 레이아웃 매니저 초기화
 
+
+        la_bg.setIcon(bgIcon);
+        la_bg.setBounds(0, 0, 500, 500);
+
         la_id.setBounds(50, 50, 200, 40);
         tf_id.setBounds(150, 50, 150, 40);
 
+
         la_pw.setBounds(50, 100, 200, 40);
         tf_password.setBounds(150, 100, 150, 40);
+
 
         la_nickName.setBounds(50, 150, 200, 40);
         tf_nickname.setBounds(150, 150, 150, 40);
@@ -72,6 +79,8 @@ public class UserView extends JFrame implements ActionListener {
         add(la_id);
         add(la_pw);
         add(la_nickName);
+        add(la_bg);
+
 
         // 창을 끄면, 프로그램 종료
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
