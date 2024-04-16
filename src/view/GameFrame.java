@@ -60,6 +60,7 @@ public class GameFrame extends JFrame implements ScreenSize {
             case GAME_RANK:
                 gameRank = new GameRank(gameFrame);
                 getContentPane().add(gameRank);
+                break;
             case GAME_SELECT_PLAYER:
                 selectPlayer = new SelectPlayer(gameFrame);
                 getContentPane().add(selectPlayer);
