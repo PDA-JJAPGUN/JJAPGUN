@@ -73,7 +73,7 @@ public class UserView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_start && isLogin){
-            this.dispose();
+//            this.dispose();
             gameController.gameStart();
         }else
             la_result.setText("유저정보 확인 실패");
