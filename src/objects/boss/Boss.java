@@ -3,6 +3,7 @@ package objects.boss;
 import objects.Bullet;
 import objects.Plane;
 import objects.player.Player;
+import view.Panel;
 
 import javax.swing.*;
 import java.awt.*;

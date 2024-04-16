@@ -36,14 +36,22 @@ public class GameController {
 
     public void gameStart() {
         gameFrame = new GameFrame();
+        System.out.println("set GameFrame");
     }
 
     public void setGameWin(boolean gameWin) {
         isGameWin = gameWin;
     }
 
-    public void gameEnd() {
-        gameFrame.change(Panel.GAME_END.name());
+    public void gameOver(boolean isGameWin) {
+        gameFrame = new GameFrame();
+        setGameWin(isGameWin);
+        if (gameFrame != null) {
+            gameFrame.change(Panel.GAME_END.name());
+        } else {
+            // gameFrame is null. Handle error or re-initialize.
+            System.out.println(gameFrame);
+        }
     }
     public UserEntity getUser() {
         return user;
