@@ -28,13 +28,11 @@ public class GameRank extends GameTitle {
         closeBtn.setFont(new Font("Arial", Font.BOLD, 20));
         backgroundPanel.add(closeBtn);
 
-//        List<UserEntity> users = GameController.getInstance().getRanks();
         List<UserEntity> users = UserController.getInstance().getRanks();
 
         // 사용자 순위 정보 추가
         int rankNumber = 0;
         for (UserEntity user : users) {
-//            RankUnit rankUnit = new RankUnit(rankNumber++, user.getNickname(), user.getBestScore());
             if (rankNumber < 12) {
                 int y = 150 + rankNumber * 45;
                 JLabel rank = new JLabel(Integer.toString(++rankNumber));
@@ -66,25 +64,4 @@ public class GameRank extends GameTitle {
         }
     }
 
-}
-
-class RankUnit {
-    JLabel rank;
-    JLabel nickname;
-    JLabel score;
-
-    RankUnit(int rank, String nickname, int score) {
-        this.rank = new JLabel(Integer.toString(rank));
-        this.nickname = new JLabel(nickname);
-        this.score = new JLabel(Integer.toString(score));
-
-        this.rank.setFont(new Font("Arial", Font.BOLD, 20));
-        this.nickname.setFont(new Font("Arial", Font.PLAIN, 20));
-        this.score.setFont(new Font("Arial", Font.PLAIN, 20));
-
-        this.rank.setForeground(Color.WHITE);
-        this.nickname.setForeground(Color.WHITE);
-        this.score.setForeground(Color.WHITE);
-
-    }
 }
