@@ -62,7 +62,7 @@ public class Enemy extends JPanel implements Plane {
     public void move() {}
 
     public boolean isColliding() {
-        if (Math.abs((player.getX() + player.getWidth() / 2) - (x + player.getWidth() / 2)) < (width / 2
+        if (Math.abs((player.getX() + player.getWidth() / 2) - (x + width / 2)) < (width / 2
                 + player.getWidth() / 2)
                 && Math.abs((player.getY() + player.getHeight() / 2) - (y + height / 2)) < (height / 2
                 + player.getHeight() / 2)) {
