@@ -16,5 +16,8 @@ public interface UserDAO {
     List<UserEntity> getUsers();
 
     void saveUser(UserEntity user);
+
+    // ID 중복 검사 메서드
+    boolean isIdDuplicate(String id);
 }
 

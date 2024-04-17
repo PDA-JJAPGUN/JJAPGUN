@@ -50,4 +50,9 @@ public class UserDAOImpl implements UserDAO{
     public void saveUser(UserEntity user) {
         store.put(user.getId(), user);
     }
+
+    // ID 중복 검사 메서드
+    public boolean isIdDuplicate(String id) {
+        return store.containsKey(id);
+    }
 }

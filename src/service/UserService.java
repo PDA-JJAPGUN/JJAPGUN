@@ -15,8 +15,13 @@ public class UserService {
         String nickname = signupDto.getNickname();
         Integer bestScore = null;
 
-        UserEntity userEntity = new UserEntity(id, password, nickname, bestScore);
-        return userDao.signup(userEntity);
+        // ID 중복 검사
+        if (userDao.isIdDuplicate(id)) {
+            return "중복된 ID입니다.";
+        } else {
+            UserEntity userEntity = new UserEntity(id, password, nickname, bestScore);
+            return userDao.signup(userEntity);
+        }
     }
 
     public Boolean login(LoginDto loginDto, GameController gameController) {
