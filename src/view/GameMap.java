@@ -17,7 +17,7 @@ public class GameMap extends JPanel {
     private ImageIcon lifeCounticon;
 
     ImageIcon nextStageIcon = new ImageIcon("images/NextStage.png");
-    private JLabel la_stage;
+    private JLabel la_stage= new JLabel();
 
     public Vector<Enemy> enemyUnits = new Vector<Enemy>();
 
@@ -58,7 +58,7 @@ public class GameMap extends JPanel {
                 add(la_score);
                 setComponentZOrder(la_score, 0);
 
-                la_stage = new JLabel();
+
                 la_stage.setIcon(nextStageIcon);
                 la_stage.setBounds(0, 200, 500, 350);
                 add(la_stage);
