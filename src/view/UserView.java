@@ -148,6 +148,6 @@ public class UserView extends JFrame implements ActionListener {
         tf_nickname.setText("");
         tf_id.setText("");
         tf_password.setText("");
-
+        isLogin = false;
     }
 }
