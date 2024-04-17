@@ -5,6 +5,7 @@ import dao.impl.UserDAOImpl;
 import dto.SignupDto;
 import dto.LoginDto;
 import entity.UserEntity;
+import session.UserSession;
 
 public class UserService {
     UserDAOImpl userDao = UserDAOImpl.getInstance();
@@ -19,14 +20,23 @@ public class UserService {
     }
 
     public Boolean login(LoginDto loginDto, GameController gameController) {
+        // Dto에서 id, password 받아옴
         String id = loginDto.getId();
         String password = loginDto.getPassword();
+        UserEntity user = userDao.getUser(id);
 
-        UserEntity userEntity = new UserEntity(id, password);
-        boolean isLogin = userDao.login(userEntity);
-
-        if (isLogin) gameController.setUser(userDao.getUser(id));
-        return isLogin;
+        // store에서 id로 가져온 user가 null이 아니고,
+        // 전달받은 user의 password와 Map에 저장되어있는 password가 같을 경우
+        if (user != null && password.equals(user.getPassword())) {
+            // 사용자 인증 성공
+            UserSession.getInstance().setLoggedInUserId(id); // 로그인된 사용자의 ID를 UserSession에 저장
+            gameController.setUser(userDao.getUser(id));
+            // 사용자 인증 성공
+            return true;
+        } else {
+            // 사용자 인증 실패
+            return false;
+        }
     }
 
     public UserEntity getUser(String id) {
