@@ -92,6 +92,11 @@ public class UserView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btn_signup) {
+            if(isLogin){
+                la_result.setText("로그아웃 후 가입하세요");
+                la_result.setForeground(Color.RED);
+                return;
+            }
             String id = tf_id.getText();
             String password = tf_password.getText();
             String nickname = tf_nickname.getText();
