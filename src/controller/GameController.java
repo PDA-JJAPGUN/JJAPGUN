@@ -59,12 +59,4 @@ public class GameController {
             System.out.println(gameFrame);
         }
     }
-
-    public List<UserEntity> getRanks() {
-        List<UserEntity> userEntities = UserDAOImpl.getInstance().getUsers();
-        return userEntities.stream()
-                .filter(user -> user.getBestScore() != null)
-                .sorted(Comparator.comparing(UserEntity::getBestScore).reversed())
-                .collect(Collectors.toList());
-    }
 }

@@ -7,6 +7,10 @@ import service.UserService;
 import session.UserSession;
 import view.UserView;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserController {
     public static UserController instance;
 
@@ -37,5 +41,9 @@ public class UserController {
     public UserEntity getLogginedUser() {
         String userId = UserSession.getInstance().getLoggedInUserId(); // user session 구현 후에 사용
         return userService.getUser(userId);
+    }
+
+    public List<UserEntity> getRanks() {
+        return userService.getRanks();
     }
 }

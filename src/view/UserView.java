@@ -102,8 +102,6 @@ public class UserView extends JFrame implements ActionListener {
             }
             SignupDto signupDto = new SignupDto(id, password, nickname);
 
-
-
             String result = userController.signup(signupDto);
             if ("중복된 ID입니다.".equals(result)) {
                 // 반환 String이 "중복된 ID입니다."일 경우의 처리 로직

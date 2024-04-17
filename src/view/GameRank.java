@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import controller.UserController;
 import entity.UserEntity;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class GameRank extends GameTitle {
 
     private ImageIcon LeaderBoardIcon = new ImageIcon("images/LeaderBoard.png");
     private Image LeaderBoardImg = LeaderBoardIcon.getImage();
+
 
     public GameRank(GameFrame gameFrame) {
         super(gameFrame);
@@ -26,7 +28,8 @@ public class GameRank extends GameTitle {
         closeBtn.setFont(new Font("Arial", Font.BOLD, 20));
         backgroundPanel.add(closeBtn);
 
-        List<UserEntity> users = GameController.getInstance().getRanks();
+//        List<UserEntity> users = GameController.getInstance().getRanks();
+        List<UserEntity> users = UserController.getInstance().getRanks();
 
         // 사용자 순위 정보 추가
         int rankNumber = 0;

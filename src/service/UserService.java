@@ -7,6 +7,10 @@ import dto.LoginDto;
 import entity.UserEntity;
 import session.UserSession;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserService {
     UserDAOImpl userDao = UserDAOImpl.getInstance();
     public String signup(SignupDto signupDto) {
@@ -56,5 +60,13 @@ public class UserService {
             user.setBestScore(score);
         }
         userDao.saveUser(user);
+    }
+
+    public List<UserEntity> getRanks() {
+        List<UserEntity> userEntities = userDao.getUsers();
+        return userEntities.stream()
+                .filter(user -> user.getBestScore() != null)
+                .sorted(Comparator.comparing(UserEntity::getBestScore).reversed())
+                .collect(Collectors.toList());
     }
 }
