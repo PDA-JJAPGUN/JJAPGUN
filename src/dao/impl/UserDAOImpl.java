@@ -32,8 +32,9 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public String signup(UserEntity userEntity) {
         String id = userEntity.getId();
+        String nickname = userEntity.getNickname();
         store.put(id, userEntity);
-        return id;
+        return nickname;
     }
 
     @Override
@@ -49,6 +50,4 @@ public class UserDAOImpl implements UserDAO{
     public void saveUser(UserEntity user) {
         store.put(user.getId(), user);
     }
-
-
 }

@@ -115,7 +115,7 @@ public class UserView extends JFrame implements ActionListener {
 
             if(userController.login(loginDto)) {
 
-                la_result.setText( UserSession.getInstance().getLoggedInUserId() + "님 로그인 성공");
+                la_result.setText( UserSession.getInstance().getLoggedInUserNickname() + "님 로그인 성공");
                 this.isLogin = true;
                 btn_logout.setVisible(true);
                 btn_login.setVisible(false);
@@ -148,6 +148,5 @@ public class UserView extends JFrame implements ActionListener {
         tf_nickname.setText("");
         tf_id.setText("");
         tf_password.setText("");
-
     }
 }

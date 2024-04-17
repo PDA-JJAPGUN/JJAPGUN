@@ -49,6 +49,5 @@ public class GameEnd extends GameTitle {
         bestScore.setText("BEST SCORE: " + user.getBestScore());
         add(bestScore);
     }
-
 }
 
