@@ -24,7 +24,7 @@ public class GameController {
     
     GameFrame gameFrame;
 
-    public boolean isGameWin = false;
+    private boolean isGameWin = false;
 
     public boolean getIsGameWin() {
         return isGameWin;
