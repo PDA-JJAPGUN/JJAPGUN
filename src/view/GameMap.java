@@ -99,16 +99,16 @@ public class GameMap extends JPanel {
         g.drawImage(stageImg, 0, stageY2, null);
 
         if (gameFrame.player != null) {
-            gameFrame.player.playerUpdate(g);
+            gameFrame.player.drawPlayer(g);
         }
 
         for (int i = 0; i < enemyUnits.size(); i++) { // null이 아니면 그려라
             if (enemyUnits.get(i) != null) {
-                enemyUnits.get(i).planeDraw(g);
+                enemyUnits.get(i).drawPlane(g);
             }
         }
         if (boss != null){
-            boss.planeDraw(g);
+            boss.drawPlane(g);
         }
 
         la_stage.setLocation(50, 200);
