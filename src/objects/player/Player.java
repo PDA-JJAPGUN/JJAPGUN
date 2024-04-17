@@ -238,11 +238,7 @@ public class Player extends JLabel {
 		}
 	}
 
-	public void playerUpdate(Graphics g) { // 플레이어에 관한 모든 그림은 여기서 정리
-		playerDraw(g);
-	}
-
-	public void playerDraw(Graphics g) {
+	public void drawPlayer(Graphics g) {
 		for (int i = 0; i < playerBullets.size(); i++) {
 			playerAttack = playerBullets.get(i);
 			if (fighterType == 1) {
@@ -262,7 +258,7 @@ public class Player extends JLabel {
 	private void playerAttackProcess() {
 		for (int i = 0; i < playerBullets.size(); i++) {
 			playerAttack = playerBullets.get(i);
-			playerAttack.Fire();
+			playerAttack.fire();
 		}
 	}
 

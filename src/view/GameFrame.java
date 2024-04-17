@@ -57,7 +57,6 @@ public class GameFrame extends JFrame implements ScreenSize {
             case GAME_END:
                 gameEnd = new GameEnd(gameFrame);
                 getContentPane().add(gameEnd);
-                System.out.println("sssssssssssssss");
                 break;
             case GAME_RANK:
                 gameRank = new GameRank(gameFrame);

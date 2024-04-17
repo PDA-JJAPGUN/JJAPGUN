@@ -1,7 +1,6 @@
 package objects;
 
 import objects.player.Player;
-import view.GameFrame;
 
 import java.awt.Image;
 
@@ -106,9 +105,8 @@ public class Bullet implements Runnable{
             }
 
             if (!player.getInvincible()) {
-                crash();
                 try {
-                    if (collision) {
+                    if (isCrashedPlayer()) {
                         explodePlayer(player);
                     }
                     Thread.sleep(10);
@@ -120,14 +118,14 @@ public class Bullet implements Runnable{
     }
 
     // 적 총알이 사용자 비행기에 닿았는지
-    public void crash() {
+    public boolean isCrashedPlayer() {
         if (Math.abs(
                 ((player.getX() - 11) + player.getWidth() / 3) - (x + width / 3)) < (width / 3 + player.getWidth() / 3)
                 && Math.abs(((player.getY() - 5) + player.getHeight() / 3) - (y + height / 3)) < (height / 3
                 + player.getHeight() / 3)) {
-            collision = true;
+            return true;
         } else {
-            collision = false;
+            return false;
         }
     }
 

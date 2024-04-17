@@ -3,9 +3,9 @@ package objects;
 import java.awt.*;
 
 public interface Plane {
-    int getLife();
-    void setLife(int life);
+    int getHp();
+    void setHp(int hp);
     void move();
-    void bulletCreate();
-    void planeDraw(Graphics g);
+    void createBullet();
+    void drawPlane(Graphics g);
 }
