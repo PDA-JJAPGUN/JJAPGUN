@@ -1,22 +1,19 @@
 package objects.Enemy;
 
-import objects.Bullet;
 import objects.Plane;
 import objects.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Enemy extends JPanel implements Plane {
     protected Player player;
     protected int x, y;
     protected int width, height;
-    protected int life;
+    protected int hp;
     protected int count;
     protected Image image;
-    protected boolean collision = false;
-    protected boolean crushCheck;
+    protected boolean crashCheck;
     protected boolean isThreadLife;
 
     @Override
@@ -39,26 +36,22 @@ public class Enemy extends JPanel implements Plane {
         return height;
     }
 
-    public int getLife() {
-        return life;
+    public int getHp() {
+        return hp;
     }
 
-    public void setLife(int life) {
-        this.life = life;
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
-    public boolean isCrushCheck() {
-        return crushCheck;
-    }
-
-    public void setCrushCheck(boolean crushCheck) {
-        this.crushCheck = crushCheck;
+    public void setCrashCheck(boolean crashCheck) {
+        this.crashCheck = crashCheck;
     }
 
     public void commonMove() throws InterruptedException {
         Thread.sleep(5);
         movedown();
-        bulletCreate();
+        createBullet();
         count++;
         if (y > 900) {
             isThreadLife = false;
@@ -68,26 +61,28 @@ public class Enemy extends JPanel implements Plane {
     @Override
     public void move() {}
 
-    public void crush() {
+    public boolean isColliding() {
+        if (Math.abs((player.getX() + player.getWidth() / 2) - (x + player.getWidth() / 2)) < (width / 2
+                + player.getWidth() / 2)
+                && Math.abs((player.getY() + player.getHeight() / 2) - (y + height / 2)) < (height / 2
+                + player.getHeight() / 2)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void explode() {
         Thread t = new Thread(() -> {
             while (!player.getInvincible() && y < 900 && y > -300) {
-                if (Math.abs((player.getX() + player.getWidth() / 2) - (x + player.getWidth() / 2)) < (width / 2
-                        + player.getWidth() / 2)
-                        && Math.abs((player.getY() + player.getHeight() / 2) - (y + height / 2)) < (height / 2
-                        + player.getHeight() / 2)) {
-                    collision = true;
-                } else {
-                    collision = false;
-                }
-
                 try {
-                    if (collision) {
+                    if (isColliding()) {
                         explodeEnemy(player, this); // 적기 - 사용자 비행기 충돌
                         break;
                     }
 
-                    if (crushCheck) {
-                        explodeEnemy(this); // 사용자 총알이 적기에 crush
+                    if (crashCheck) {
+                        explodeEnemy(this); // 사용자 총알이 적기에 crash
                         break;
                     }
 
@@ -101,10 +96,10 @@ public class Enemy extends JPanel implements Plane {
     }
 
     @Override
-    public void bulletCreate() {}
+    public void createBullet() {}
 
     @Override
-    public void planeDraw(Graphics g) {}
+    public void drawPlane(Graphics g) {}
 
     public void movedown() {
         y++;

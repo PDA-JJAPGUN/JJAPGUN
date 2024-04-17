@@ -20,14 +20,14 @@ public class Enemy2 extends Enemy {
         this.width = w;
         this.height = h;
         this.image = new ImageIcon("images/enemy4.png").getImage();
-        this.life = 3;
-        this.crushCheck = false;
+        this.hp = 3;
+        this.crashCheck = false;
         this.isThreadLife = true;
 
         this.player.addEnemyContext(enemy2);
 
         this.move();
-        this.crush();
+        this.explode();
     }
 
     public void move() {
@@ -49,15 +49,15 @@ public class Enemy2 extends Enemy {
         }).start();
     }
 
-    public void bulletCreate() {
-        if (count % 100 == 0 && !crushCheck) {
+    public void createBullet() {
+        if (count % 100 == 0 && !crashCheck) {
             bullet = new Bullet(player, x + 35, y + 55, 270, 5, 20, 20);
             bullets.add(bullet);
         }
     }
 
     @Override
-    public void planeDraw(Graphics g) {
+    public void drawPlane(Graphics g) {
         g.drawImage(image, x, y, width, height, null);
         for (int i = 0; i < bullets.size(); i++) {
             bullet = bullets.get(i);

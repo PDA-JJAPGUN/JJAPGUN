@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import controller.UserController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ public class GameStart extends GameTitle {
         super(gameFrame);
         setLayout(null);
 
-        JLabel welcomeMsg = createLabel("Welcome, " + GameController.getInstance().getUser().getNickname() + "!", null, Color.WHITE);
+        JLabel welcomeMsg = createLabel("Welcome, " +  UserController.getInstance().getLogginedUser().getNickname() + "!", null, Color.WHITE);
         welcomeMsg.setFont(new Font("Arial", Font.BOLD, 30));
         welcomeMsg.setBounds(setX(300),  setY(100) - 50, 1000, 100);  // 위치와 크기 설정
         add(welcomeMsg);

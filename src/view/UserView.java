@@ -102,14 +102,16 @@ public class UserView extends JFrame implements ActionListener {
             }
             SignupDto signupDto = new SignupDto(id, password, nickname);
 
-            la_result.setForeground(Color.BLUE);
+
 
             String result = userController.signup(signupDto);
             if ("중복된 ID입니다.".equals(result)) {
                 // 반환 String이 "중복된 ID입니다."일 경우의 처리 로직
+                la_result.setForeground(Color.RED);
                 la_result.setText(result);
             } else {
                 // 반환 String이 "중복된 ID입니다."가 아닐 경우의 처리 로직
+                la_result.setForeground(Color.BLUE);
                 la_result.setText("회원 가입 성공: " + result);
             }
 
@@ -123,7 +125,7 @@ public class UserView extends JFrame implements ActionListener {
             LoginDto loginDto = new LoginDto(id, password);
 
             if(userController.login(loginDto)) {
-
+                la_result.setForeground(Color.BLUE);
                 la_result.setText( UserSession.getInstance().getLoggedInUserNickname() + "님 로그인 성공");
                 this.isLogin = true;
                 btn_logout.setVisible(true);
@@ -157,5 +159,7 @@ public class UserView extends JFrame implements ActionListener {
         tf_nickname.setText("");
         tf_id.setText("");
         tf_password.setText("");
+
+        isLogin = false;
     }
 }

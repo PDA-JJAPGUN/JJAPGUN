@@ -3,7 +3,6 @@ package objects.boss;
 import objects.Bullet;
 import objects.Plane;
 import objects.player.Player;
-import view.Panel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +28,7 @@ public class Boss implements Plane {
         this.player = player;
         this.x = x;
         this.y = y;
-        this.hp = 100;
+        this.hp = 300;
 
         player.addBossContext(boss);
         move();
@@ -59,21 +58,15 @@ public class Boss implements Plane {
         return height;
     }
 
+    @Override
     public int getHp() {
         return hp;
     }
 
+    @Override
     public void setHp(int hp) {
         this.hp = hp;
     }
-
-    @Override
-    public int getLife() {
-        return 0;
-    }
-
-    @Override
-    public void setLife(int life) {}
 
     @Override
     public void move() {
@@ -84,7 +77,7 @@ public class Boss implements Plane {
                     try {
                         Thread.sleep(5);
                         count++;
-                        bulletCreate();
+                        createBullet();
 
                         if (hp == 0) {
                             isThreadLife = false;
@@ -97,7 +90,7 @@ public class Boss implements Plane {
         }).start();
     }
 
-    public void bulletCreate() {
+    public void createBullet() {
         if (count % 50 == 0) {
             Random random = new Random();
             int angle = 220 + random.nextInt(90);
@@ -109,7 +102,7 @@ public class Boss implements Plane {
     }
 
     @Override
-    public void planeDraw(Graphics g) {
+    public void drawPlane(Graphics g) {
         g.drawImage(imgBoss, x, y, width, height, null);
         for (int i = 0; i < bullets.size(); i++) {
             bullet = bullets.get(i);
