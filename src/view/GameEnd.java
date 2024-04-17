@@ -24,14 +24,14 @@ public class GameEnd extends GameTitle {
         int width = 150;
         int height = 40;
 
-        JButton rankBtn = createButton("RANK", width, height, setX(width) - width, setY(height));
+        JButton rankBtn = createButton(ActionCommand.RANK.name(), width, height, setX(width) - width, setY(height));
         add(rankBtn);
 
-        JButton exitBtn = createButton("EXIT", width, height, setX(width) + width, setY(height));
+        JButton exitBtn = createButton(ActionCommand.EXIT.name(), width, height, setX(width) + width, setY(height));
         add(exitBtn);
 
 
-        JLabel gameResult = createLabel(gameController.isGameWin ? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
+        JLabel gameResult = createLabel(gameController.getIsGameWin() ? "YOU WIN" : "YOU LOSE", null, Color.WHITE);
         gameResult.setFont(new Font(null, Font.BOLD, 40));
         gameResult.setBounds(180,  400, 300, 100);  // 위치와 크기 설정
         add(gameResult);
