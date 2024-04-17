@@ -209,7 +209,7 @@ public class Player extends JLabel {
 				playerBullets.add(playerAttack);
 			}
 			if (weaponLevel == 4) { // 대각선 추가
-				playerAttack = new PlayerAttack(boss, enemies, x - 15, y - 40, 80, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x - 30, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 				playerAttack = new PlayerAttack(boss, enemies, x - 10, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
@@ -219,7 +219,7 @@ public class Player extends JLabel {
 				playerBullets.add(playerAttack);
 				playerAttack = new PlayerAttack(boss, enemies, x + 50, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
-				playerAttack = new PlayerAttack(boss, enemies, x + 55, y - 40, 100, 2);
+				playerAttack = new PlayerAttack(boss, enemies, x + 70, y - 40, 90, 2);
 				playerBullets.add(playerAttack);
 			}
 		}
@@ -266,9 +266,9 @@ public class Player extends JLabel {
 		}
 	}
 
-	public void setWeaponLevelUp(boolean isWepponLevelUp) {
-		this.isWeaponLevelUp = isWepponLevelUp;
-		if (isWepponLevelUp == true && weaponLevel < 6) {
+	public void setWeaponLevelUp(boolean isWeaponLevelUp) {
+		this.isWeaponLevelUp = isWeaponLevelUp;
+		if (isWeaponLevelUp && weaponLevel < 6) {
 			weaponLevel = weaponLevel + 2;
 			if (weaponLevel == 4) {
 			} else if (weaponLevel == 5) {

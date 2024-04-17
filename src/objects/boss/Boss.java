@@ -29,7 +29,7 @@ public class Boss implements Plane {
         this.player = player;
         this.x = x;
         this.y = y;
-        this.hp = 100;
+        this.hp = 300;
 
         player.addBossContext(boss);
         move();

@@ -125,8 +125,7 @@ public class PlayerAttack implements Runnable {
 				}
 			}
 		}
-//		System.out.println("enemies length : "+enemies.size());
-//		System.out.println("toRemove length : "+toRemove.size());
+
 		Enemy removedEnemy = null;
 		for (int i : toRemove) {
 			removedEnemy = enemies.remove(i);
