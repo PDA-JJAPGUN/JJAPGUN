@@ -30,8 +30,6 @@ public class UserService {
         if (user != null && password.equals(user.getPassword())) {
             // 사용자 인증 성공
             UserSession.getInstance().setLoggedInUserId(id); // 로그인된 사용자의 ID를 UserSession에 저장
-            gameController.setUser(userDao.getUser(id));
-            // 사용자 인증 성공
             return true;
         } else {
             // 사용자 인증 실패

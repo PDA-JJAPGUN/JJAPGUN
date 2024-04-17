@@ -21,11 +21,7 @@ public class GameController {
         return instance;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
     
-    UserEntity user;
     GameFrame gameFrame;
 
     public boolean isGameWin = false;
@@ -50,9 +46,6 @@ public class GameController {
         this.gameFrame = gameFrame;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
 
     public int getFinalScore() {
         return gameFrame.player.score;

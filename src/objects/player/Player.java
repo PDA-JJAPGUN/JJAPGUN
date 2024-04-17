@@ -305,10 +305,9 @@ public class Player extends JLabel {
 	}
 
 	private void gameOver() {
-		GameController gameController = GameController.getInstance();
-		userService.saveBestScore(gameController.getUser().getId(), score);
+		userService.saveBestScore(UserSession.getInstance().getLoggedInUserId(), score);
 		if (life <= 0) {
-			gameController.gameOver(false);
+			GameController.getInstance().gameOver(false);
 			gameFrame.change(Panel.GAME_END.name());
 			isThreadLife = false;
 			gameFrame.isgame = false;
