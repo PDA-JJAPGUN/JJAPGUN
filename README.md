@@ -68,6 +68,18 @@
 
 <br>
 
+- 스테이지 2, 보스 스테이지
+
+<img src = "https://github.com/PDA-JJAPGUN/JJAPGUN/assets/37354574/988bded2-fa76-4f5e-a826-2de17d3ac801" width="800px">
+
+
+
+<br>
+
+- 랭킹
+
+<img src = "https://github.com/PDA-JJAPGUN/JJAPGUN/assets/37354574/346b2ac9-cc8e-49fe-9989-da71dff3d621" width="400px">
+
 <br>
 
 
